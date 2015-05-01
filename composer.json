@@ -1,0 +1,26 @@
+{
+    "name": "hyn-me/webserver",
+    "description": "Management and configuration of webserver",
+    "tags": ["laravel", "hyn-me", "webserver"],
+    "license": "CC-BY-4.0",
+    "authors": [
+        {
+            "name": "Daniël `Luceos` Klabbers",
+            "email": "daniel+hyn@klabbers.email"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/support": "5.0.*",
+        "hyn-me/framework": "*"
+    },
+    "suggest": {
+      "hyn-me/management-interface": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "HynMe\\Webserver": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
