@@ -12,10 +12,10 @@
     "require": {
         "php": ">=5.5.0",
         "illuminate/support": "5.0.*",
-        "hyn-me/framework": "*"
+        "hyn-me/framework": "dev-master"
     },
     "suggest": {
-      "hyn-me/management-interface": "*"
+      "hyn-me/management-interface": "dev-master"
     },
     "autoload": {
         "psr-0": {
