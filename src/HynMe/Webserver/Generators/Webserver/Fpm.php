@@ -3,8 +3,9 @@
 use Config, File;
 use HynMe\MultiTenant\Models\Website;
 use HynMe\Webserver\Contracts\WebserverContract;
+use HynMe\Webserver\Generators\AbstractGenerator;
 
-class Fpm implements WebserverContract
+class Fpm extends AbstractGenerator implements WebserverContract
 {
 
     /**
@@ -20,12 +21,7 @@ class Fpm implements WebserverContract
         $this->website = $website;
     }
 
-    public function write()
-    {
-        return File::put(sprintf("%s%d-%s.conf", Config::get('webserver.paths.fpm'), $this->website->id, $this->website->present()->urlName), $this->generate());
-    }
-
-    protected function generate()
+    public function generate()
     {
         return view('webserver::webserver.fpm.configuration', [
             'website'=>$this->website,
@@ -35,8 +31,12 @@ class Fpm implements WebserverContract
         ]);
     }
 
-    public function __toString()
+    /**
+     * Provides the complete path to publish the generated content to
+     * @return string
+     */
+    protected function publishPath()
     {
-        return (string) $this->generate();
+        return sprintf("%s%d-%s.conf", Config::get('webserver.paths.fpm'), $this->website->id, $this->website->present()->urlName);
     }
 }

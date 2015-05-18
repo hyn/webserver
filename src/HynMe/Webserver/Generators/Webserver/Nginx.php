@@ -3,8 +3,9 @@
 use Config, File;
 use HynMe\MultiTenant\Models\Website;
 use HynMe\Webserver\Contracts\WebserverContract;
+use HynMe\Webserver\Generators\AbstractGenerator;
 
-class Nginx implements WebserverContract
+class Nginx extends AbstractGenerator implements WebserverContract
 {
 
     /**
@@ -20,21 +21,20 @@ class Nginx implements WebserverContract
         $this->website = $website;
     }
 
-    public function write()
-    {
-        return File::put(sprintf("%s%d-%s.conf", Config::get('webserver.paths.nginx'), $this->website->id, $this->website->present()->urlName), $this->generate());
-    }
-
-    protected function generate()
+    public function generate()
     {
         return view('webserver::webserver.nginx.configuration', [
-            'website'=>$this->website,
+            'website' => $this->website,
             'public_path' => public_path()
         ]);
     }
 
-    public function __toString()
+    /**
+     * Provides the complete path to publish the generated content to
+     * @return string
+     */
+    protected function publishPath()
     {
-        return (string) $this->generate();
+        return sprintf("%s%d-%s.conf", Config::get('webserver.paths.nginx'), $this->website->id, $this->website->present()->urlName);
     }
 }

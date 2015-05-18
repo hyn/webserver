@@ -32,7 +32,6 @@ class WebserverServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
 	}
 
 	/**

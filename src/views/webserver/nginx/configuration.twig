@@ -5,26 +5,23 @@
 #       @website: {{ website.id }} "{{ website.present().name }}"
 #       @url: {{ route('management-interface@website@read', website.present().urlArguments) }}
 
-{% if website.directory().image_cache() %}
-proxy_cache_path {{ website.directory().image_cache() }} levels=1:2 keys_zone=img_cache_hyn_mt_{{ website.id }}:10m max_size=1G;
+{% if website.directory.image_cache() %}
+proxy_cache_path {{ website.directory.image_cache() }} levels=1:2 keys_zone=img_cache_hyn_mt_{{ website.id }}:10m max_size=1G;
 {% endif %}
 
-{% if website.directory().media() %}
+{% if website.directory.media() %}
 server {
     listen 80;
-    {#&#123;&#35;listen 443 ssl spdy;&#35;&#125;#}
 
     server_name {% for hostname in website.hostnames.lists('hostname') %}media.{{ hostname }}{% if loop.last != true %} {% endif %}{% endfor %};
 
     add_header Access-Control-Allow-Origin *;
     add_header Access-Control-Request-Method GET;
 
-    {#&#123;&#35;ssl_certificate_key /domains/wm.hyn.me/storage/webserver/ssl/1/hyn.me.key;&#35;&#125;#}
-    {#&#123;&#35;ssl_certificate /domains/wm.hyn.me/storage/webserver/ssl/1/hyn.me.crt;&#35;&#125;#}
 
     # resizing
     location ~* ^/resize/([\d\-]+)/([\d\-]+)/(.+)$ {
-        alias 		{{ website.directory().media() }}$3;
+        alias 		{{ website.directory.media() }}$3;
         image_filter 	resize $1 $2;
         image_filter_buffer 10M;
         error_page 	415 = /empty;
@@ -32,7 +29,7 @@ server {
 
     # cropping
     location ~* ^/crop/([\d\-]+)/([\d\-]+)/(.+)$ {
-        alias 		{{ website.directory().media() }}$3;
+        alias 		{{ website.directory.media() }}$3;
         image_filter crop $1 $2;
         image_filter_buffer 10M;
         error_page 	415 = /empty;
@@ -40,7 +37,7 @@ server {
 
     # rotating
     location ~* ^/rotate/([\d\-]+)/(.+)$ {
-        alias 		{{ website.directory().media() }}$2;
+        alias 		{{ website.directory.media() }}$2;
         image_filter_buffer         10M;
         image_filter                rotate $1;
         error_page 	415 = /empty;
@@ -48,7 +45,7 @@ server {
 
     # passthrough
     location ~* ^/(.+)$ {
-        alias 		{{ website.directory().media() }}/$1;
+        alias 		{{ website.directory.media() }}/$1;
         error_page 	415 = /empty;
     }
 
@@ -66,14 +63,9 @@ server {
 
 server {
     listen 80;
-    {#listen 443 ssl spdy;#}
 
     # server hostnames
     server_name {{ website.hostnames.lists('hostname')|join(" ") }};
-
-    # ssl certificate
-    {#ssl_certificate_key /domains/wm.hyn.me/storage/webserver/ssl/1/hyn.me.key;#}
-    {#ssl_certificate /domains/wm.hyn.me/storage/webserver/ssl/1/hyn.me.crt;#}
 
     # redirect any www domain to non-www
     if ( $host ~* ^www\.(.*) ) {
@@ -85,7 +77,7 @@ server {
     root                        {{ public_path }};
     index                       index.php;
 
-{% if website.directory().media() %}
+    {% if website.directory.media() %}
     # attempt to passthrough to image service
     location ~* ^/media/(.+)$ {
         proxy_pass 		    media.{{ website.hostnames.lists('hostname')|first }}/$1;
@@ -95,12 +87,12 @@ server {
         proxy_cache_valid 	any 1m;
         proxy_cache_use_stale error timeout invalid_header updating;
     }
-{% endif %}
+    {% endif %}
 
-    {% if website.directory().cache() %}
+    {% if website.directory.cache() %}
     # map public cache folder to private domain folder
     location /cache/ {
-        alias 		{{ website.directory().cache() }};
+        alias 		{{ website.directory.cache() }};
     }
     {% endif %}
 

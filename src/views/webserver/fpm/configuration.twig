@@ -1,3 +1,10 @@
+;#
+;#   Auto generated Nginx configuration
+;#       @time: {{ "now"|date('H:i:s d-m-Y') }}
+;#       @author: hyn.me
+;#       @website: {{ website.id }} "{{ website.present().name }}"
+;#       @url: {{ route('management-interface@website@read', website.present().urlArguments) }}
+
 [{{ website.id }}-{{ website.present().urlName }}]
 listen=127.0.0.1:{{ 12000 + website.id }}
 user={{ user }}
