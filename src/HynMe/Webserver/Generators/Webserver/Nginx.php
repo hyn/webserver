@@ -2,25 +2,15 @@
 
 use Config, File;
 use HynMe\MultiTenant\Models\Website;
-use HynMe\Webserver\Contracts\WebserverContract;
-use HynMe\Webserver\Generators\AbstractGenerator;
+use HynMe\Webserver\Generators\AbstractFileGenerator;
 
-class Nginx extends AbstractGenerator implements WebserverContract
+class Nginx extends AbstractFileGenerator
 {
 
     /**
-     * @var Website
+     * Generates the view that is written
+     * @return \Illuminate\View\View
      */
-    protected $website;
-
-    /**
-     * @param Website $website
-     */
-    public function __construct(Website $website)
-    {
-        $this->website = $website;
-    }
-
     public function generate()
     {
         return view('webserver::webserver.nginx.configuration', [
@@ -35,6 +25,21 @@ class Nginx extends AbstractGenerator implements WebserverContract
      */
     protected function publishPath()
     {
-        return sprintf("%s%d-%s.conf", Config::get('webserver.paths.nginx'), $this->website->id, $this->website->present()->urlName);
+        return sprintf("%s%s.conf", Config::get('webserver.paths.nginx'), $this->name());
+    }
+
+    /**
+     * Reloads service if possible
+     *
+     * @return bool
+     */
+    protected function serviceReload()
+    {
+        $ret = exec("nginx -t", $out, $state);
+
+        if($state === 0)
+            exec("service nginx reload", $out, $state);
+
+        return true;
     }
 }

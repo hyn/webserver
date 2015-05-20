@@ -15,12 +15,12 @@ class WebserverServiceProvider extends ServiceProvider {
     public function boot()
     {
 
-        /*
-         * Set configuration variables
-         */
+        // configuration
         $this->mergeConfigFrom(__DIR__.'/../../config/webserver.php', 'webserver');
         // adds views
         $this->loadViewsFrom(__DIR__.'/../../views', 'webserver');
+        // migrations
+        $this->publishes([__DIR__.'/../../migrations/' => database_path('/migrations')], 'migrations');
 
         Website::observe(new Observers\WebsiteObserver);
     }

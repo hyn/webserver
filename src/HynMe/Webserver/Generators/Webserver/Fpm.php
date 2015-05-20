@@ -2,32 +2,22 @@
 
 use Config, File;
 use HynMe\MultiTenant\Models\Website;
-use HynMe\Webserver\Contracts\WebserverContract;
-use HynMe\Webserver\Generators\AbstractGenerator;
+use HynMe\Webserver\Generators\AbstractFileGenerator;
 
-class Fpm extends AbstractGenerator implements WebserverContract
+class Fpm extends AbstractFileGenerator
 {
 
     /**
-     * @var Website
+     * Generates the view that is written
+     * @return \Illuminate\View\View
      */
-    protected $website;
-
-    /**
-     * @param Website $website
-     */
-    public function __construct(Website $website)
-    {
-        $this->website = $website;
-    }
-
     public function generate()
     {
         return view('webserver::webserver.fpm.configuration', [
-            'website'=>$this->website,
+            'website'   => $this->website,
             'base_path' => base_path(),
-            'user'=>get_current_user(),
-            'group'=>get_current_user()
+            'user'      => $this->website->identifier,
+            'group'     => get_current_user()
         ]);
     }
 
@@ -37,6 +27,20 @@ class Fpm extends AbstractGenerator implements WebserverContract
      */
     protected function publishPath()
     {
-        return sprintf("%s%d-%s.conf", Config::get('webserver.paths.fpm'), $this->website->id, $this->website->present()->urlName);
+        return sprintf("%s%s.conf", Config::get('webserver.paths.fpm'), $this->name());
+    }
+    /**
+     * Reloads service if possible
+     *
+     * @return bool
+     */
+    protected function serviceReload()
+    {
+        $ret = exec("php5-fpm -t", $out, $state);
+
+        if($state === 0)
+            exec("service php5-fpm reload", $out, $state);
+
+        return true;
     }
 }

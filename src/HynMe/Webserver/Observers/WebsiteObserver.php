@@ -1,36 +1,31 @@
 <?php namespace HynMe\Webserver\Observers;
 
-use App, Queue;
+use App;
 use HynMe\Webserver\Commands\WebserverCommand;
-use HynMe\Webserver\Generators\Webserver\Fpm;
-use HynMe\Webserver\Generators\Webserver\Nginx;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 
 class WebsiteObserver
 {
     use DispatchesCommands;
 
-    protected function saveConfigurations($model)
+    public function created($model)
     {
-        // use queue if available
-        if(Queue::connected())
-            $this->dispatch(
-                new WebserverCommand($model)
-            );
-        else {
-            (new Nginx($model))->write();
-            (new Fpm($model))->write();
-
-        }
+        $this->dispatch(
+            new WebserverCommand($model->id, 'create')
+        );
     }
 
-    public function saved($model)
+    public function updated($model)
     {
-        $this->saveConfigurations($model);
+        $this->dispatch(
+            new WebserverCommand($model->id, 'update')
+        );
     }
 
-    public function deleted($model)
+    public function deleting($model)
     {
-        $this->saveConfigurations($model);
+        $this->dispatch(
+            new WebserverCommand($model->id, 'delete')
+        );
     }
 }

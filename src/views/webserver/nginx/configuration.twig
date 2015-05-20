@@ -80,7 +80,7 @@ server {
     {% if website.directory.media() %}
     # attempt to passthrough to image service
     location ~* ^/media/(.+)$ {
-        proxy_pass 		    media.{{ website.hostnames.lists('hostname')|first }}/$1;
+        proxy_pass 		    $scheme://media.{{ website.hostnames.lists('hostname')|first }}/$1;
         proxy_cache 	    img_cache_hyn_mt_{{ website.id }};
         proxy_cache_key 	"$host$document_uri";
         proxy_cache_valid 	200 1d;

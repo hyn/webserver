@@ -5,11 +5,19 @@
 ;#       @website: {{ website.id }} "{{ website.present().name }}"
 ;#       @url: {{ route('management-interface@website@read', website.present().urlArguments) }}
 
+;# unique fpm group
 [{{ website.id }}-{{ website.present().urlName }}]
+
+;# listening for nginx proxying
 listen=127.0.0.1:{{ 12000 + website.id }}
+
+;# user under which the application runs
 user={{ user }}
+
+;# group under which the application runs
 group={{ group }}
 
+;# fpm pool management variables
 pm=dynamic
 pm.max_children         = 20
 pm.start_servers        = 5
@@ -17,4 +25,5 @@ pm.min_spare_servers    = 5
 pm.max_spare_servers    = 10
 pm.max_requests         = 20
 
+;# force fpm workers into the following path
 chdir                   = {{ base_path }}
