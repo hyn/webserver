@@ -4,109 +4,27 @@
 #       @author: hyn.me
 #       @website: {{ website.id }} "{{ website.present().name }}"
 #       @url: {{ route('management-interface@website@read', website.present().urlArguments) }}
+#
 
 {% if website.directory.image_cache() %}
 proxy_cache_path {{ website.directory.image_cache() }} levels=1:2 keys_zone=img_cache_hyn_mt_{{ website.id }}:10m max_size=1G;
 {% endif %}
 
-{% if website.directory.media() %}
-server {
-    listen 80;
+#
+#   Hostnames with certificate
+#
+{% for hostname in website.hostnamesWithCertificate %}
+        {% include "webserver::webserver.nginx.includes.server-block" with {
+            'hostname': hostname,
+            'ssl': hostname.certificate
+        } %}
+{% endfor %}
 
-    server_name {% for hostname in website.hostnames.lists('hostname') %}media.{{ hostname }}{% if loop.last != true %} {% endif %}{% endfor %};
-
-    add_header Access-Control-Allow-Origin *;
-    add_header Access-Control-Request-Method GET;
-
-
-    # resizing
-    location ~* ^/resize/([\d\-]+)/([\d\-]+)/(.+)$ {
-        alias 		{{ website.directory.media() }}$3;
-        image_filter 	resize $1 $2;
-        image_filter_buffer 10M;
-        error_page 	415 = /empty;
-    }
-
-    # cropping
-    location ~* ^/crop/([\d\-]+)/([\d\-]+)/(.+)$ {
-        alias 		{{ website.directory.media() }}$3;
-        image_filter crop $1 $2;
-        image_filter_buffer 10M;
-        error_page 	415 = /empty;
-    }
-
-    # rotating
-    location ~* ^/rotate/([\d\-]+)/(.+)$ {
-        alias 		{{ website.directory.media() }}$2;
-        image_filter_buffer         10M;
-        image_filter                rotate $1;
-        error_page 	415 = /empty;
-    }
-
-    # passthrough
-    location ~* ^/(.+)$ {
-        alias 		{{ website.directory.media() }}/$1;
-        error_page 	415 = /empty;
-    }
-
-    # not found
-    location / {
-        return 404;
-    }
-
-    # not found
-    location = /empty {
-        return 404;
-    }
-}
+#
+#   Hostnames without certificate
+#
+{% if website.hostnamesWithoutCertificate.count() > 0 %}
+    {% include "webserver::webserver.nginx.includes.server-block" with {
+            'hostnames': website.hostnamesWithoutCertificate
+        } %}
 {% endif %}
-
-server {
-    listen 80;
-
-    # server hostnames
-    server_name {{ website.hostnames.lists('hostname')|join(" ") }};
-
-    # redirect any www domain to non-www
-    if ( $host ~* ^www\.(.*) ) {
-        set             $host_nowww     $1;
-        rewrite         ^(.*)$          $scheme://$host_nowww$1 permanent;
-    }
-
-    # root path of website; serve files from here
-    root                        {{ public_path }};
-    index                       index.php;
-
-    {% if website.directory.media() %}
-    # attempt to passthrough to image service
-    location ~* ^/media/(.+)$ {
-        proxy_pass 		    $scheme://media.{{ website.hostnames.lists('hostname')|first }}/$1;
-        proxy_cache 	    img_cache_hyn_mt_{{ website.id }};
-        proxy_cache_key 	"$host$document_uri";
-        proxy_cache_valid 	200 1d;
-        proxy_cache_valid 	any 1m;
-        proxy_cache_use_stale error timeout invalid_header updating;
-    }
-    {% endif %}
-
-    {% if website.directory.cache() %}
-    # map public cache folder to private domain folder
-    location /cache/ {
-        alias 		{{ website.directory.cache() }};
-    }
-    {% endif %}
-
-    location / {
-        index           index.php;
-        try_files       $uri $uri/ $uri/index.php?$args /index.php?$args;
-    }
-    # pass the PHP scripts to FastCGI server from upstream phpfcgi
-    location ~ \.php(/|$) {
-        fastcgi_pass    127.0.0.1:{{ 12000 + website.id }};
-        include         fastcgi_params;
-
-        fastcgi_split_path_info ^(.+\.php)(/.*)$;
-
-        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-}

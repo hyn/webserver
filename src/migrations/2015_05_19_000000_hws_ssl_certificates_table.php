@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class HmtSslCertificatesTable extends Migration {
+class HwsSslCertificatesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -19,14 +19,18 @@ class HmtSslCertificatesTable extends Migration {
             $table->bigInteger('tenant_id')->unsigned();
 
             // certificate
-            $table->string('certificate');
+            $table->text('certificate');
             // bundles
-            $table->string('authority_bundle');
+            $table->text('authority_bundle');
+            // key
+            $table->text('key');
+
+            $table->boolean('wildcard')->default(false);
 
             // date when certificate becomes usable as read from certificate
-            $table->timestamp('valid_from')->nullable();
+            $table->timestamp('validates_at')->nullable();
             // date of expiry as read from certificate
-            $table->timestamp('expires_at')->nullable();
+            $table->timestamp('invalidates_at')->nullable();
 
             // timestaps
             $table->timestamps();

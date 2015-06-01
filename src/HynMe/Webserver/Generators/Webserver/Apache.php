@@ -1,10 +1,9 @@
 <?php namespace HynMe\Webserver\Generators\Webserver;
 
-use Config, File;
-use HynMe\MultiTenant\Models\Website;
+use Config;
 use HynMe\Webserver\Generators\AbstractFileGenerator;
 
-class Fpm extends AbstractFileGenerator
+class Apache extends AbstractFileGenerator
 {
 
     /**
@@ -13,12 +12,12 @@ class Fpm extends AbstractFileGenerator
      */
     public function generate()
     {
-        return view('webserver::webserver.fpm.configuration', [
-            'website'   => $this->website,
+        return view('webserver::webserver.apache.configuration', [
+            'website' => $this->website,
+            'public_path' => public_path(),
+            'log_path' => base_path("log/apache-{$this->website->id}-{$this->website->identifier}"),
             'base_path' => base_path(),
-            'user'      => $this->website->identifier,
-            'group'     => get_current_user(),
-            'config'    => Config::get('webserver.fpm')
+            'config' => Config::get('webserver.apache')
         ]);
     }
 
@@ -28,8 +27,9 @@ class Fpm extends AbstractFileGenerator
      */
     protected function publishPath()
     {
-        return sprintf("%s%s.conf", Config::get('webserver.paths.fpm'), $this->name());
+        return sprintf("%s%s.conf", Config::get('webserver.paths.apache'), $this->name());
     }
+
     /**
      * Reloads service if possible
      *
@@ -37,10 +37,10 @@ class Fpm extends AbstractFileGenerator
      */
     protected function serviceReload()
     {
-        $ret = exec("php5-fpm -t", $out, $state);
+        $ret = exec("apache2ctl -t", $out, $state);
 
-        if($state === 0)
-            exec("service php5-fpm reload", $out, $state);
+        if($ret == "Syntax OK" || $state === 0)
+            exec("service apache2 reload", $out, $state);
 
         return true;
     }

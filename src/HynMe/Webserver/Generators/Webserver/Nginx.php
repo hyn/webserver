@@ -1,7 +1,6 @@
 <?php namespace HynMe\Webserver\Generators\Webserver;
 
-use Config, File;
-use HynMe\MultiTenant\Models\Website;
+use Config;
 use HynMe\Webserver\Generators\AbstractFileGenerator;
 
 class Nginx extends AbstractFileGenerator
@@ -15,7 +14,10 @@ class Nginx extends AbstractFileGenerator
     {
         return view('webserver::webserver.nginx.configuration', [
             'website' => $this->website,
-            'public_path' => public_path()
+            'public_path' => public_path(),
+            'log_path' => base_path("log/nginx-{$this->website->id}-{$this->website->identifier}"),
+            'config' => Config::get('webserver.nginx'),
+            'fpm_port' => Config::get('webserver.fpm.port')
         ]);
     }
 

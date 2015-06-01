@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class HmtSslHostnamesTable extends Migration {
+class HwsSslHostnamesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -18,7 +18,7 @@ class HmtSslHostnamesTable extends Migration {
             // tenant owner
             $table->bigInteger('ssl_certificate_id')->unsigned();
             // domain relation
-            $table->bigInteger('domain_id')->unsigned();
+            $table->bigInteger('hostname_id')->unsigned();
 
             // certificate
             $table->string('hostname');
@@ -29,7 +29,7 @@ class HmtSslHostnamesTable extends Migration {
 
             // relations
             $table->foreign('ssl_certificate_id')->references('id')->on('ssl_certificates')->onDelete('cascade');
-            $table->foreign('domain_id')->references('id')->on('domains')->onDelete('set null');
+            $table->foreign('hostname_id')->references('id')->on('hostnames')->onDelete('set null');
 
             // index
             $table->index(['hostname','domain_id']);

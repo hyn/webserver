@@ -1,0 +1,32 @@
+#
+#   Auto generated Apache configuration
+#       @time: {{ "now"|date('H:i:s d-m-Y') }}
+#       @author: hyn.me
+#       @website: {{ website.id }} "{{ website.present().name }}"
+#       @url: {{ route('management-interface@website@read', website.present().urlArguments) }}
+#
+
+#
+#   Hostnames with certificate
+#
+{% for hostname in website.hostnamesWithCertificate %}
+    {% include "webserver::webserver.apache.includes.server-block" with {
+    'hostname': hostname,
+    'ssl': hostname.certificate
+    } %}
+{% endfor %}
+
+#
+#   Hostnames without certificate
+#
+{% if website.hostnamesWithoutCertificate.count() > 0 %}
+    {% include "webserver::webserver.apache.includes.server-block" with {
+    'hostnames': website.hostnamesWithoutCertificate
+    } %}
+{% endif %}
+
+<Directory "{{ base_path }}">
+    Options FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>

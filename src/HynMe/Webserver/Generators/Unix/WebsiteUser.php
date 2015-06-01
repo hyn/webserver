@@ -25,7 +25,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onCreate()
     {
-        return exec(sprintf("adduser %s --home %s --no-create-home --disabled-password --disabled-login",
+        return exec(sprintf('adduser %s --home %s --no-create-home --disabled-password --disabled-login --gecos ""',
             $this->name(),
             base_path()));
     }

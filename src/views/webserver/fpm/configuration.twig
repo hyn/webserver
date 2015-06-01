@@ -4,18 +4,19 @@
 ;#       @author: hyn.me
 ;#       @website: {{ website.id }} "{{ website.present().name }}"
 ;#       @url: {{ route('management-interface@website@read', website.present().urlArguments) }}
+;#
 
 ;# unique fpm group
 [{{ website.id }}-{{ website.present().urlName }}]
 
 ;# listening for nginx proxying
-listen=127.0.0.1:{{ 12000 + website.id }}
+listen=127.0.0.1:{{ config.port + website.id }}
 
 ;# user under which the application runs
 user={{ user }}
 
 ;# group under which the application runs
-group={{ group }}
+group=users
 
 ;# fpm pool management variables
 pm=dynamic

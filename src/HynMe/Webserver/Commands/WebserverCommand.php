@@ -4,14 +4,15 @@ use App\Commands\Command;
 
 use App;
 
-use HynMe\Webserver\Generators\Unix\WebsiteUser;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 
 use HynMe\Webserver\Generators\Webserver\Fpm;
 use HynMe\Webserver\Generators\Webserver\Nginx;
+use HynMe\Webserver\Generators\Webserver\Ssl;
+use HynMe\Webserver\Generators\Webserver\Apache;
+use HynMe\Webserver\Generators\Unix\WebsiteUser;
 
 class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
 
@@ -52,7 +53,14 @@ class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
 
         $action = sprintf("on%s", ucfirst($this->action));
 
+//         write certificates first
+        foreach($this->website->hostnamesWithCertificate as $hostname)
+        {
+            (new Ssl($hostname->certificate))->onUpdate();
+        }
+
         (new WebsiteUser($this->website))->{$action}();
+        (new Apache($this->website))->{$action}();
         (new Nginx($this->website))->{$action}();
         (new Fpm($this->website))->{$action}();
 	}

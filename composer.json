@@ -12,7 +12,8 @@
     "require": {
         "php": ">=5.5.0",
         "illuminate/support": "5.0.*",
-        "hyn-me/framework": "~0.1.0"
+        "hyn-me/framework": "~0.1.0",
+        "phpseclib/phpseclib": "~0.3.10"
     },
     "suggest": {
       "hyn-me/management-interface": "dev-master"

@@ -1,6 +1,9 @@
 <?php namespace HynMe\Webserver;
 
 use HynMe\MultiTenant\Models\Website;
+use HynMe\Webserver\Models\SslCertificate;
+use HynMe\Webserver\Models\SslHostname;
+use HynMe\Webserver\Repositories\SslRepository;
 use Illuminate\Support\ServiceProvider;
 
 class WebserverServiceProvider extends ServiceProvider {
@@ -23,6 +26,15 @@ class WebserverServiceProvider extends ServiceProvider {
         $this->publishes([__DIR__.'/../../migrations/' => database_path('/migrations')], 'migrations');
 
         Website::observe(new Observers\WebsiteObserver);
+        SslCertificate::observe(new Observers\SslCertificateObserver);
+
+        /*
+         * Ssl repository
+         */
+        $this->app->bind('HynMe\Webserver\Contracts\SslRepositoryContract', function($app)
+        {
+            return new SslRepository(new SslCertificate, new SslHostname());
+        });
     }
 
 	/**
