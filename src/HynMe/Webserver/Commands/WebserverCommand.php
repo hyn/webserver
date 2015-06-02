@@ -53,7 +53,6 @@ class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
 
         $action = sprintf("on%s", ucfirst($this->action));
 
-//         write certificates first
         foreach($this->website->hostnamesWithCertificate as $hostname)
         {
             (new Ssl($hostname->certificate))->onUpdate();

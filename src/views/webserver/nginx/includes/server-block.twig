@@ -14,6 +14,10 @@ server {
     # server hostnames
     server_name {% if hostname %}{{ hostname.hostname }}{% else %}{{ hostnames.lists('hostname')|join(" ") }}{% endif %};
 
+    # allow cross origin access
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Request-Method GET;
+
     # redirect any www domain to non-www
     if ( $host ~* ^www\.(.*) ) {
         set             $host_nowww     $1;
@@ -32,12 +36,7 @@ server {
     {% if website.directory.media() %}
     # attempt to passthrough to image service
     location ~* ^/media/(.+)$ {
-        proxy_pass 		    $scheme://media.{% if hostname %}{{ hostname.hostname }}{% else %}{{ hostnames.lists('hostname')|first }}{% endif %}/$1;
-        proxy_cache 	    img_cache_hyn_mt_{{ website.id }};
-        proxy_cache_key 	"$host$document_uri";
-        proxy_cache_valid 	200 1d;
-        proxy_cache_valid 	any 1m;
-        proxy_cache_use_stale error timeout invalid_header updating;
+        alias 		{{ website.directory.media() }}$1;
     }
     {% endif %}
 
@@ -118,7 +117,7 @@ server {
 
     # passthrough
     location ~* ^/(.+)$ {
-        alias 		{{ website.directory.media() }}/$1;
+        alias 		{{ website.directory.media() }}$1;
         error_page 	415 = /empty;
     }
 

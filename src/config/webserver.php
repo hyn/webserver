@@ -22,8 +22,8 @@ return [
     'apache' => [
         'enabled' => true,
         'port' => [
-            'http' => 8080,
-            'https' => 8443,
+            'http' => 80,
+            'https' => 443,
         ]
     ],
     /*
@@ -33,7 +33,7 @@ return [
         'enabled' => true,
         'port' => [
             'http' => 80,
-            'https' => 443,
+            'https' => 443
         ]
     ],
     /*
@@ -44,6 +44,7 @@ return [
         /*
          * base modifier for fpm pool port
          * @example if base is 9000, will generate pool file for website Id 5 with port 9005
+         * @info this port is used in Nginx configurations for the PHP proxy
          */
         'port' => 9000
     ]

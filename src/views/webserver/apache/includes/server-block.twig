@@ -23,8 +23,13 @@
     # user
 #    RUidGid {{ website.identifier }} users
 
+    {% if website.directory.media %}
     # media directory
-    alias "/media" "{{ website.directory }}"
+    alias "/media/" "{{ website.directory.media }}"
+    {% endif %}
+
+    # allow cross domain loading of resources
+    Header set Access-Control-Allow-Origin "*"
 
     # logging
     ErrorLog {{ log_path ~ '.error.log' }}
@@ -56,6 +61,14 @@
 
     # user
 #    RUidGid {{ website.identifier }} users
+
+    {% if website.directory.media %}
+    # media directory
+    alias "/media/" "{{ website.directory.media }}"
+    {% endif %}
+
+    # allow cross domain loading of resources
+    Header set Access-Control-Allow-Origin "*"
 
     # logging
     ErrorLog {{ log_path ~ '.error.log' }}
