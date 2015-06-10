@@ -17,7 +17,7 @@ class Fpm extends AbstractFileGenerator
             'website'   => $this->website,
             'base_path' => base_path(),
             'user'      => $this->website->identifier,
-            'group'     => get_current_user(),
+            'group'     => Config::get('webserver.group'),
             'config'    => Config::get('webserver.fpm')
         ]);
     }

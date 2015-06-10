@@ -4,6 +4,7 @@ use HynMe\MultiTenant\Models\Website;
 use File;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
 use Config;
+use ReflectionClass;
 
 abstract class AbstractFileGenerator extends AbstractGenerator
 {
@@ -82,20 +83,28 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      */
     abstract protected function serviceReload();
 
+    /**
+     * @return string
+     */
     protected function baseName()
     {
-        $name = basename(__CLASS__);
-        $name = strtolower($name);
-        return $name;
+        $reflect = new ReflectionClass($this);
+        return strtolower($reflect->getShortName());
     }
 
     /**
      * Loads possible configuration from config file
-     * @return mixed
+     *
+     * @return array
+     * @throws \Exception
      */
     public function configuration()
     {
-        return Config::get('webserver::'. $this->baseName(), []);
+        $configuration = Config::get('webserver');
+        if(!$configuration || !array_has($configuration, $this->baseName()))
+            throw new \Exception("No configuration for {$this->baseName()}");
+
+        return array_get($configuration, $this->baseName());
     }
 
     /**
@@ -120,7 +129,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
         );
 
         // load the tenant include path
-        $targetPath = Config::get("webserver::paths.{$this->baseName()}");
+        $targetPath = array_get($this->configuration(), 'path');
 
         // save file to global include path
         File::put($webserviceFileLocation, sprintf(array_get($this->configuration(), "include"), $targetPath));

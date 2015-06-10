@@ -8,19 +8,16 @@
  */
 return [
     'webservers' => ['nginx', 'apache'],
-    /*
-     * Paths for local configuration files
-     */
-    'paths' => [
-        'fpm' => storage_path('webserver/fpm/'),
-        'apache' => storage_path('webserver/apache/'),
-        'nginx' => storage_path('webserver/nginx/'),
-        'ssl' => storage_path('webserver/ssl/'),
+
+    'group' => 'www-data',
+    'ssl' => [
+        'path' => storage_path('webserver/ssl')
     ],
     /*
      * Apache
      */
     'apache' => [
+        'path' => storage_path('webserver/apache/'),
         // class that runs functionality for this service
         'class' => 'HynMe\Webserver\Generators\Webserver\Apache',
         'enabled' => true,
@@ -42,6 +39,7 @@ return [
      * Nginx
      */
     'nginx' => [
+        'path' => storage_path('webserver/nginx/'),
         'class' => 'HynMe\Webserver\Generators\Webserver\Nginx',
         'enabled' => true,
         'port' => [
@@ -61,6 +59,7 @@ return [
      * PHP FPM
      */
     'fpm' => [
+        'path' => storage_path('webserver/fpm/'),
         'class' => 'HynMe\Webserver\Generators\Webserver\Fpm',
         'enabled' => true,
         /*

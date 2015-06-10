@@ -27,7 +27,7 @@ class Apache extends AbstractFileGenerator
      */
     protected function publishPath()
     {
-        return sprintf("%s%s.conf", Config::get('webserver.paths.apache'), $this->name());
+        return sprintf("%s%s.conf", Config::get('webserver.apache.path'), $this->name());
     }
 
     /**
@@ -43,13 +43,5 @@ class Apache extends AbstractFileGenerator
             exec("service apache2 reload", $out, $state);
 
         return true;
-    }
-
-    /**
-     * Registers the service on the webserver
-     */
-    public function register()
-    {
-
     }
 }

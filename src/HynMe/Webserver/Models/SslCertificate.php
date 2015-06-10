@@ -35,7 +35,7 @@ class SslCertificate extends SystemModel
 
     public function publishPath($postfix = "key")
     {
-        return sprintf("%s%s/certificate.%s", Config::get('webserver.paths.ssl'), $this->id, $postfix);
+        return sprintf("%s/%s/certificate.%s", Config::get('webserver.ssl.path'), $this->id, $postfix);
     }
 
     public function getPathKeyAttribute()

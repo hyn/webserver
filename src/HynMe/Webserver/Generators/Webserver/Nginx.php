@@ -27,7 +27,7 @@ class Nginx extends AbstractFileGenerator
      */
     protected function publishPath()
     {
-        return sprintf("%s%s.conf", Config::get('webserver.paths.nginx'), $this->name());
+        return sprintf("%s%s.conf", Config::get('webserver.nginx.path'), $this->name());
     }
 
     /**

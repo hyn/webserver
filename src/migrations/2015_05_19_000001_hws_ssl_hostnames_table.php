@@ -27,12 +27,16 @@ class HwsSslHostnamesTable extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
+            // index
+            $table->index('hostname');
+            $table->index('hostname_id');
+            $table->index('ssl_certificate_id');
             // relations
             $table->foreign('ssl_certificate_id')->references('id')->on('ssl_certificates')->onDelete('cascade');
-            $table->foreign('hostname_id')->references('id')->on('hostnames')->onDelete('set null');
+            // the set null constraint does not work on mariadb; let's just ignore that for now
+            // @TODO but fix support for set null in the future somehow
+//            $table->foreign('hostname_id')->references('id')->on('hostnames')->onDelete('set null');
 
-            // index
-            $table->index(['hostname','domain_id']);
         });
 	}
 
