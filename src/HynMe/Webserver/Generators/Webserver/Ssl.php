@@ -1,6 +1,6 @@
 <?php namespace HynMe\Webserver\Generators\Webserver;
 
-use Config, File;
+use File;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
 use HynMe\Webserver\Models\SslCertificate;
 

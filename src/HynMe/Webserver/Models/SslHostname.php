@@ -9,6 +9,6 @@ class SslHostname extends SystemModel
      */
     public function certificate()
     {
-        return $this->belongsTo(__NAMESPACE__.'\SslCertificate');
+        return $this->belongsTo(SslCertificate::class);
     }
 }

@@ -1,5 +1,9 @@
 <?php namespace HynMe\Webserver\Abstracts;
 
+/**
+ * Class AbstractGenerator
+ * @package HynMe\Webserver\Abstracts
+ */
 abstract class AbstractGenerator
 {
     /**

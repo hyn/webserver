@@ -30,7 +30,7 @@ class SslCertificate extends SystemModel
 
     public function hostnames()
     {
-        return $this->hasMany(__NAMESPACE__.'\SslHostname');
+        return $this->hasMany(SslHostname::class);
     }
 
     public function publishPath($postfix = "key")
