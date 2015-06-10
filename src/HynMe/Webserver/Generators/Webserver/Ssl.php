@@ -59,9 +59,9 @@ class Ssl extends AbstractGenerator
      */
     public function onCreate()
     {
-
         return
-            File::put($this->publishPath('key'), $this->certificate->key)
+            File::makeDirectory(dirname($this->publishPath('pem')))
+            && File::put($this->publishPath('key'), $this->certificate->key)
             && File::put($this->publishPath('pem'), $this->pem());
     }
 
