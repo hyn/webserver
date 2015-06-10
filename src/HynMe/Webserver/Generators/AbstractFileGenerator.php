@@ -3,7 +3,7 @@
 use HynMe\MultiTenant\Models\Website;
 use File;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
-use Queue;
+use Config;
 
 abstract class AbstractFileGenerator extends AbstractGenerator
 {
@@ -81,4 +81,63 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      * @return bool
      */
     abstract protected function serviceReload();
+
+    protected function baseName()
+    {
+        $name = basename(__CLASS__);
+        $name = strtolower($name);
+        return $name;
+    }
+
+    /**
+     * Loads possible configuration from config file
+     * @return mixed
+     */
+    public function configuration()
+    {
+        return Config::get('webserver::'. $this->baseName(), []);
+    }
+
+    /**
+     * tests whether a certain service is installed
+     * @return bool
+     */
+    public function isInstalled()
+    {
+        $service = array_get($this->configuration(), 'service');
+        return $service && File::exists($service);
+    }
+
+    /**
+     * Registers the service
+     */
+    public function register()
+    {
+        // create a unique filename for the global include directory
+        $webserviceFileLocation = sprintf("%s%s",
+            array_get($this->configuration(), "conf"),
+            sprintf(array_get($this->configuration(), "mask", "%s"), substr(md5(env('APP_KEY')), 0, 10))
+        );
+
+        // load the tenant include path
+        $targetPath = Config::get("webserver::paths.{$this->baseName()}");
+
+        // save file to global include path
+        File::put($webserviceFileLocation, sprintf(array_get($this->configuration(), "include"), $targetPath));
+
+        /*
+         * Register any depending services as well
+         */
+        $depends = array_get($this->configuration(), 'depends', []);
+
+        foreach($depends as $depend)
+        {
+            $class = Config::get("webserver::{$depend}.class");
+            (new $class)->register();
+        }
+
+        // reload any services
+        if(method_exists($this, 'serviceReload'))
+            $this->serviceReload();
+    }
 }

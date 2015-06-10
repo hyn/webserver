@@ -44,4 +44,12 @@ class Apache extends AbstractFileGenerator
 
         return true;
     }
+
+    /**
+     * Registers the service on the webserver
+     */
+    public function register()
+    {
+
+    }
 }
