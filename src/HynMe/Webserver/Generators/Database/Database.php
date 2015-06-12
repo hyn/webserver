@@ -1,8 +1,8 @@
 <?php namespace HynMe\Webserver\Generators\Database;
 
 use HynMe\MultiTenant\Models\Website;
+use HynMe\MultiTenant\Tenant\DatabaseConnection;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
-use DB;
 
 class Database extends AbstractGenerator
 {
@@ -25,7 +25,7 @@ class Database extends AbstractGenerator
      */
     public function name()
     {
-        return sprintf("%d-%s", $this->website->id, $this->website->identifier);
+        // .. not used?
     }
 
     /**
@@ -43,7 +43,7 @@ class Database extends AbstractGenerator
      */
     public function onCreate()
     {
-        DB::raw("CREATE DATABASE {$this->name()}");
+        return DatabaseConnection::create($this->website);
     }
 
     /**
@@ -59,6 +59,6 @@ class Database extends AbstractGenerator
      */
     public function onDelete()
     {
-        DB::raw("DROP DATABASE {$this->name()}");
+        // TODO: Implement onDelete() method.
     }
 }
