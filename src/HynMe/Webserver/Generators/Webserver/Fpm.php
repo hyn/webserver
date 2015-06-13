@@ -28,7 +28,7 @@ class Fpm extends AbstractFileGenerator
      */
     protected function publishPath()
     {
-        return sprintf("%s%s.conf", Config::get('webserver.paths.fpm'), $this->name());
+        return sprintf("%s%s.conf", Config::get('webserver.fpm.path'), $this->name());
     }
     /**
      * Reloads service if possible
