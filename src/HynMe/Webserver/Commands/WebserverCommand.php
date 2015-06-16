@@ -4,6 +4,7 @@ use App\Commands\Command;
 
 use App;
 
+use HynMe\Webserver\Generators\Database\Database;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
@@ -62,6 +63,8 @@ class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
         (new Apache($this->website))->{$action}();
         (new Nginx($this->website))->{$action}();
         (new Fpm($this->website))->{$action}();
+
+        (new Database($this->website))->{$action}();
 	}
 
 }

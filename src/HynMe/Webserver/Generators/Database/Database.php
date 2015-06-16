@@ -43,7 +43,7 @@ class Database extends AbstractGenerator
      */
     public function onCreate()
     {
-        return DatabaseConnection::create($this->website);
+        return $this->website->database->create();
     }
 
     /**
