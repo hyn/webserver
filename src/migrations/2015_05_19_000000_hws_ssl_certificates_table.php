@@ -12,7 +12,7 @@ class HwsSslCertificatesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::connection('system')->create('ssl_certificates', function(Blueprint $table)
+		Schema::connection('hyn')->create('ssl_certificates', function(Blueprint $table)
         {
             $table->bigIncrements('id');
             // tenant owner
@@ -50,7 +50,7 @@ class HwsSslCertificatesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::connection('system')->dropIfExists('ssl_certificates');
+		Schema::connection('hyn')->dropIfExists('ssl_certificates');
 	}
 
 }

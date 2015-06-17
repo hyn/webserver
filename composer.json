@@ -2,7 +2,7 @@
     "name": "hyn-me/webserver",
     "description": "Management and configuration of webserver",
     "tags": ["laravel", "hyn-me", "webserver"],
-    "license": "CC-BY-4.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Daniël `Luceos` Klabbers",

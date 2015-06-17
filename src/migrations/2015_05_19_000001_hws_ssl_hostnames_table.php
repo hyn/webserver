@@ -12,7 +12,7 @@ class HwsSslHostnamesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::connection('system')->create('ssl_hostnames', function(Blueprint $table)
+		Schema::connection('hyn')->create('ssl_hostnames', function(Blueprint $table)
         {
             $table->bigIncrements('id');
             // tenant owner
@@ -47,7 +47,7 @@ class HwsSslHostnamesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::connection('system')->dropIfExists('ssl_hostnames');
+		Schema::connection('hyn')->dropIfExists('ssl_hostnames');
 	}
 
 }
