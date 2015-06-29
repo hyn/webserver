@@ -1,6 +1,6 @@
 <?php namespace HynMe\Webserver\Commands;
 
-use App\Commands\Command;
+use Illuminate\Console\Command;
 
 use App;
 
