@@ -1,7 +1,5 @@
 <?php namespace HynMe\Webserver\Commands;
 
-use Illuminate\Console\Command;
-
 use App;
 
 use Illuminate\Commands\Command;
