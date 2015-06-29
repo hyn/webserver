@@ -4,11 +4,12 @@ use Illuminate\Console\Command;
 
 use App;
 
-use HynMe\Webserver\Generators\Database\Database;
+use Illuminate\Commands\Command;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 
+use HynMe\Webserver\Generators\Database\Database;
 use HynMe\Webserver\Generators\Webserver\Fpm;
 use HynMe\Webserver\Generators\Webserver\Nginx;
 use HynMe\Webserver\Generators\Webserver\Ssl;
