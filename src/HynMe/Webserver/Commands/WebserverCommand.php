@@ -2,7 +2,7 @@
 
 use App;
 
-use Illuminate\Commands\Command;
+use Illuminate\Console\Command;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
