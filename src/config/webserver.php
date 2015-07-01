@@ -29,7 +29,10 @@ return [
         // path to service daemon
         'service' => '/etc/init.d/apache2',
         // system wide configuration directory
-        'conf' => '/etc/apache2/sites-enabled/',
+        'conf' => [
+            // location for ubuntu 14.04 systems
+            '/etc/apache2/sites-enabled/'
+        ],
         // mask for auto-generated config file that includes the tenant configurations
         'mask' => '%s.conf',
         // include format using sprintf
@@ -47,7 +50,7 @@ return [
             'https' => 443
         ],
         'service' => '/etc/init.d/nginx',
-        'conf' => '/etc/nginx/sites-enabled/',
+        'conf' => ['/etc/nginx/sites-enabled/'],
         'mask' => '%s.conf',
         'include' => 'include %s*;',
         // other services this service depends on
@@ -67,6 +70,8 @@ return [
          * @example if base is 9000, will generate pool file for website Id 5 with port 9005
          * @info this port is used in Nginx configurations for the PHP proxy
          */
+        'conf' => ['/etc/php5/fpm/pool.d/'],
+        'mask' => '%s.conf',
         'port' => 9000,
         'configtest' => 'php5-fpm -t'
     ]

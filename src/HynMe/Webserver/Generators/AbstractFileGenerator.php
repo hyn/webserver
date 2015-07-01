@@ -124,7 +124,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
     {
         // create a unique filename for the global include directory
         $webserviceFileLocation = sprintf("%s%s",
-            array_get($this->configuration(), "conf"),
+            $this->findPathForRegistration(array_get($this->configuration(), "conf", [])),
             sprintf(array_get($this->configuration(), "mask", "%s"), substr(md5(env('APP_KEY')), 0, 10))
         );
 
@@ -148,5 +148,19 @@ abstract class AbstractFileGenerator extends AbstractGenerator
         // reload any services
         if(method_exists($this, 'serviceReload'))
             $this->serviceReload();
+    }
+
+    /**
+     * Finds first directory that exists
+     * @param array $paths
+     * @return string
+     */
+    protected function findPathForRegistration($paths = [])
+    {
+        foreach($paths as $path) {
+            if (!empty($path) && File::isDirectory($paths)) {
+                return $path;
+            }
+        }
     }
 }
