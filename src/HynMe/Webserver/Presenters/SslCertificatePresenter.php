@@ -35,7 +35,7 @@ class SslCertificatePresenter extends AbstractModelPresenter
      */
     public function name()
     {
-        return $this->id;
+        return null;
     }
     public function expiry()
     {
