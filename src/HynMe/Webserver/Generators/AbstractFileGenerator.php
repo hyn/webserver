@@ -81,7 +81,21 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      * Reloads service if possible
      * @return bool
      */
-    abstract protected function serviceReload();
+    protected function serviceReload()
+    {
+        if(!$this->isInstalled())   return null;
+
+        exec(array_get($this->configuration() ,'actions.configtest'), $out, $test);
+
+        if($test == 0)
+        {
+            exec(array_get($this->configuration() ,'actions.reload'), $out, $reload);
+        }
+        else
+            $reload = 1;
+
+        return $test == 0 && $reload == 0;
+    }
 
     /**
      * @return string
@@ -122,6 +136,8 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      */
     public function register()
     {
+        if(!$this->isInstalled())   return null;
+
         // create a unique filename for the global include directory
         $webserviceFileLocation = sprintf("%s%s",
             $this->findPathForRegistration(array_get($this->configuration(), "conf", [])),

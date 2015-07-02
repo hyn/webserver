@@ -30,18 +30,4 @@ class Fpm extends AbstractFileGenerator
     {
         return sprintf("%s%s.conf", Config::get('webserver.fpm.path'), $this->name());
     }
-    /**
-     * Reloads service if possible
-     *
-     * @return bool
-     */
-    protected function serviceReload()
-    {
-        $ret = exec("php5-fpm -t", $out, $state);
-
-        if($state === 0)
-            exec("service php5-fpm reload", $out, $state);
-
-        return true;
-    }
 }

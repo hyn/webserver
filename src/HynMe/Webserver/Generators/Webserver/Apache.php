@@ -29,19 +29,4 @@ class Apache extends AbstractFileGenerator
     {
         return sprintf("%s%s.conf", Config::get('webserver.apache.path'), $this->name());
     }
-
-    /**
-     * Reloads service if possible
-     *
-     * @return bool
-     */
-    protected function serviceReload()
-    {
-        $ret = exec("apache2ctl -t", $out, $state);
-
-        if($ret == "Syntax OK" || $state === 0)
-            exec("service apache2 reload", $out, $state);
-
-        return true;
-    }
 }

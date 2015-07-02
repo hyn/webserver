@@ -25,9 +25,13 @@ return [
             'http' => 80,
             'https' => 443,
         ],
-        'configtest' => 'apache2ctl -t',
-        // path to service daemon
+        // path to service daemon, used to verify service exists
         'service' => '/etc/init.d/apache2',
+        // how to run actions for this service
+        'actions' => [
+            'configtest' => 'apache2ctl -t',
+            'reload' => 'apache2ctl graceful'
+        ],
         // system wide configuration directory
         'conf' => [
             // location for ubuntu 14.04 systems
@@ -49,11 +53,20 @@ return [
             'http' => 80,
             'https' => 443
         ],
+        // path to service daemon, used to verify service exists
         'service' => '/etc/init.d/nginx',
+        // how to run actions for this service
+        'actions' => [
+            'configtest' => '/etc/init.d/nginx -t',
+            'reload' => '/etc/init.d/nginx reload'
+        ],
         'conf' => ['/etc/nginx/sites-enabled/'],
         'mask' => '%s.conf',
         'include' => 'include %s*;',
-        // other services this service depends on
+        /*
+         * the nginx service depends on fpm
+         * during changes we will automatically trigger fpm as well
+         */
         'depends' => [
             'fpm'
         ]
@@ -65,14 +78,20 @@ return [
         'path' => storage_path('webserver/fpm/'),
         'class' => 'HynMe\Webserver\Generators\Webserver\Fpm',
         'enabled' => true,
+        'conf' => ['/etc/php5/fpm/pool.d/'],
+        // path to service daemon, used to verify service exists
+        'service' => '/etc/init.d/php5-fpm',
+        // how to run actions for this service
+        'actions' => [
+            'configtest' => '/etc/init.d/php5-fpm -t',
+            'reload' => '/etc/init.d/php5-fpm reload'
+        ],
+        'mask' => '%s.conf',
         /*
          * base modifier for fpm pool port
          * @example if base is 9000, will generate pool file for website Id 5 with port 9005
          * @info this port is used in Nginx configurations for the PHP proxy
          */
-        'conf' => ['/etc/php5/fpm/pool.d/'],
-        'mask' => '%s.conf',
         'port' => 9000,
-        'configtest' => 'php5-fpm -t'
     ]
 ];

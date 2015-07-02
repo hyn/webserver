@@ -29,19 +29,4 @@ class Nginx extends AbstractFileGenerator
     {
         return sprintf("%s%s.conf", Config::get('webserver.nginx.path'), $this->name());
     }
-
-    /**
-     * Reloads service if possible
-     *
-     * @return bool
-     */
-    protected function serviceReload()
-    {
-        $ret = exec("nginx -t", $out, $state);
-
-        if($state === 0)
-            exec("service nginx reload", $out, $state);
-
-        return true;
-    }
 }
