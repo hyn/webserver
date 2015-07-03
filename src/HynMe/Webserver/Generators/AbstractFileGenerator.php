@@ -158,6 +158,8 @@ abstract class AbstractFileGenerator extends AbstractGenerator
         foreach($depends as $depend)
         {
             $class = Config::get("webserver::{$depend}.class");
+            if(empty($class))
+                continue;
             (new $class)->register();
         }
 
