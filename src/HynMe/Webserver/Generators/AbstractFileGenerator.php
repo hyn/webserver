@@ -174,7 +174,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
     protected function findPathForRegistration($paths = [])
     {
         foreach($paths as $path) {
-            if (!empty($path) && File::isDirectory($paths)) {
+            if (!empty($path) && File::isDirectory($path)) {
                 return $path;
             }
         }

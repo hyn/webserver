@@ -59,6 +59,6 @@ class Database extends AbstractGenerator
      */
     public function onDelete()
     {
-        // TODO: Implement onDelete() method.
+        return $this->website->database->delete();
     }
 }
