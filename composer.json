@@ -10,7 +10,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/hyn-me/webserver/issues",
+        "issues": "https://github.com/hyn-me/multi-tenant/issues",
         "source": "https://github.com/hyn-me/webserver",
         "docs": "http://hyn.me"
     },
