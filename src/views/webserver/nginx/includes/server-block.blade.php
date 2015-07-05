@@ -3,7 +3,7 @@ server {
 
     listen {{ $config->port->http or 80 }};
 
-    @if($ssl or false)
+    @if(isset($ssl))
     listen {{ $config->port->https or 443 }} ssl spdy;
     ssl_certificate_key {{ $ssl->pathKey }};
     ssl_certificate {{ $ssl->pathPem }};
@@ -12,10 +12,10 @@ server {
 
 
     # server hostnames
-    @if($hostname or false)
-        server_name {{ $hostname->hostname }}
+    @if(isset($hostname))
+        server_name {{ $hostname->hostname }};
     @else
-        server_name {{ join(' ', $hostnames->lists('hostname')) }}
+        server_name {{ $hostnames->implode('hostname', ' ') }};
     @endif
 
     # allow cross origin access

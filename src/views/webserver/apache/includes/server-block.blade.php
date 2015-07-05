@@ -1,13 +1,13 @@
 
 
 <VirtualHost *:{{ $config->port->http or 80 }}>
-    @if($hostname or false)
-        ServerAdmin webmaster@{{ $hostname->hostname }}
+    @if(isset($hostname))
+        ServerAdmin {{ "webmaster@" . $hostname->hostname }}
     @else
-        ServerAdmin webmaster@{{ $hostnames->first()->hostname }}
+        ServerAdmin {{ "webmaster@" .  $hostnames->first()->hostname }}
     @endif
 
-    @if($hostname or false)
+    @if(isset($hostname))
         ServerName {{ $hostname->hostname }}
     @else
         @foreach($hostnames->lists('hostname') as $i => $hostname)
@@ -27,9 +27,9 @@
     # user
     #    RUidGid {{ $website->identifier }} users
 
-    @if($website->directory->media)
+    @if($website->directory->media())
         # media directory
-        alias "/media/" "{{ $website->directory->media }}"
+        alias "/media/" "{{ $website->directory->media() }}"
     @endif
 
     # allow cross domain loading of resources
@@ -41,16 +41,16 @@
 </VirtualHost>
 
 
-@if($ssl or false)
+@if(isset($ssl))
 <VirtualHost *:{{ $config->port->https or 443 }}>
 
-    @if($hostname or false)
+    @if(isset($hostname))
         ServerAdmin webmaster@{{ $hostname->hostname }}
     @else
         ServerAdmin webmaster@{{ $hostnames->first()->hostname }}
     @endif
 
-    @if($hostname or false)
+    @if(isset($hostname))
         ServerName {{ $hostname->hostname }}
     @else
         @foreach($hostnames->lists('hostname') as $i => $hostname)
