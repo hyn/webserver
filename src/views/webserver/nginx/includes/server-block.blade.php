@@ -37,19 +37,19 @@ server {
     access_log          {{ $log_path }}.access.log;
     error_log           {{ $log_path }}.error.log notice;
 
-    {% if website.directory.media() %}
+    @if($website->directory->media())
     # attempt to passthrough to image service
     location ~* ^/media/(.+)$ {
         alias 		{{ $website->directory->media() }}$1;
     }
-    {% endif %}
+    @endif
 
-    {% if website.directory.cache() %}
+    @if($website->directory->cache())
     # map public cache folder to private domain folder
     location /cache/ {
         alias 		{{ $website->directory->cache() }};
     }
-    {% endif %}
+    @endif
 
     location / {
         index           index.php;
