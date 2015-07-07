@@ -1,7 +1,6 @@
 <?php namespace HynMe\Webserver\Helpers;
 
 use File;
-use Illuminate\Support\Collection;
 
 /**
  * Class ServerConfigurationHelper

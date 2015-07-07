@@ -3,7 +3,6 @@
 use HynMe\MultiTenant\Models\Website;
 use File;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
-use Config;
 use ReflectionClass;
 
 abstract class AbstractFileGenerator extends AbstractGenerator
@@ -114,7 +113,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      */
     public function configuration()
     {
-        $configuration = Config::get('webserver');
+        $configuration = config('webserver');
         if(!$configuration || !array_has($configuration, $this->baseName()))
             throw new \Exception("No configuration for {$this->baseName()}");
 
@@ -157,7 +156,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
 
         foreach($depends as $depend)
         {
-            $class = Config::get("webserver::{$depend}.class");
+            $class = config("webserver::{$depend}.class");
             if(empty($class))
                 continue;
             (new $class)->register();
