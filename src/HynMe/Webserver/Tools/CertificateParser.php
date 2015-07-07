@@ -65,7 +65,7 @@ class CertificateParser
     public function getValidityFrom()
     {
         $validity = array_get($this->x509result, 'tbsCertificate.validity');
-        return new Carbon(array_get($validity, 'notBefore.utcTime'));
+        return $validity ? new Carbon(array_get($validity, 'notBefore.utcTime')) : null;
     }
 
     /**
@@ -74,7 +74,7 @@ class CertificateParser
     public function getValidityTo()
     {
         $validity = array_get($this->x509result, 'tbsCertificate.validity');
-        return new Carbon(array_get($validity, 'notAfter.utcTime'));
+        return $validity ? new Carbon(array_get($validity, 'notAfter.utcTime')) : null;
     }
 
     /**

@@ -13,6 +13,14 @@ class SslCertificateObserver
      */
     public function creating($model)
     {
+
+        foreach(['certificate', 'authority_bundle', 'key'] as $attribute)
+        {
+            if($model->{$attribute})
+                $model->{$attribute} = trim($model->{$attribute});
+        }
+
+
         if($model->x509)
         {
             $model->validates_at = $model->x509->getValidityFrom();
