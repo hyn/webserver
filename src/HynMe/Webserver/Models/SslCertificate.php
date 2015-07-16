@@ -1,7 +1,7 @@
 <?php namespace HynMe\Webserver\Models;
 
 use Config;
-use HynMe\MultiTenant\Abstracts\Models\SystemModel;
+use LaraLeague\MultiTenant\Abstracts\Models\SystemModel;
 use HynMe\Webserver\Tools\CertificateParser;
 use Laracasts\Presenter\PresentableTrait;
 

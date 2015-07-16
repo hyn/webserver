@@ -1,6 +1,6 @@
 <?php namespace HynMe\Webserver\Generators\Unix;
 
-use HynMe\MultiTenant\Models\Website;
+use LaraLeague\MultiTenant\Models\Website;
 use HynMe\Webserver\Generators\AbstractUserGenerator;
 
 class WebsiteUser extends AbstractUserGenerator

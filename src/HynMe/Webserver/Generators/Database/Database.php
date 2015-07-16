@@ -1,7 +1,7 @@
 <?php namespace HynMe\Webserver\Generators\Database;
 
-use HynMe\MultiTenant\Models\Website;
-use HynMe\MultiTenant\Tenant\DatabaseConnection;
+use LaraLeague\MultiTenant\Models\Website;
+use LaraLeague\MultiTenant\Tenant\DatabaseConnection;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
 
 class Database extends AbstractGenerator

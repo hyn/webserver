@@ -1,6 +1,6 @@
 <?php namespace HynMe\Webserver;
 
-use HynMe\MultiTenant\Models\Website;
+use LaraLeague\MultiTenant\Models\Website;
 use HynMe\Webserver\Models\SslCertificate;
 use HynMe\Webserver\Models\SslHostname;
 use HynMe\Webserver\Repositories\SslRepository;

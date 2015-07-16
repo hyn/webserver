@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=5.5.0",
-        "hyn-me/framework": "*",
+        "lara-league/framework": "*",
         "phpseclib/phpseclib": "~0.3.10"
     },
     "suggest": {

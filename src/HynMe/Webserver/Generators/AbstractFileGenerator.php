@@ -1,6 +1,6 @@
 <?php namespace HynMe\Webserver\Generators;
 
-use HynMe\MultiTenant\Models\Website;
+use LaraLeague\MultiTenant\Models\Website;
 use File;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
 use ReflectionClass;
