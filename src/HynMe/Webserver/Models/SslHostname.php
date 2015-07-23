@@ -1,6 +1,6 @@
 <?php namespace HynMe\Webserver\Models;
 
-use LaraLeague\MultiTenant\Abstracts\Models\SystemModel;
+use Laraflock\MultiTenant\Abstracts\Models\SystemModel;
 use Laracasts\Presenter\PresentableTrait;
 
 class SslHostname extends SystemModel

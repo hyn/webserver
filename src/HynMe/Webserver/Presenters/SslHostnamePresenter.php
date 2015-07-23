@@ -1,6 +1,6 @@
 <?php namespace HynMe\Webserver\Presenters;
 
-use LaraLeague\MultiTenant\Presenters\HostnamePresenter;
+use Laraflock\MultiTenant\Presenters\HostnamePresenter;
 
 class SslHostnamePresenter extends HostnamePresenter
 {

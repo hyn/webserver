@@ -1,7 +1,7 @@
 <?php namespace HynMe\Webserver\Repositories;
 
 use HynMe\Framework\Repositories\BaseRepository;
-use LaraLeague\MultiTenant\Models\Hostname;
+use Laraflock\MultiTenant\Models\Hostname;
 use HynMe\Webserver\Contracts\SslRepositoryContract;
 
 class SslRepository extends BaseRepository implements SslRepositoryContract

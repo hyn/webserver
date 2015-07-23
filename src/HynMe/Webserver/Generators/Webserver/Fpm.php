@@ -1,7 +1,7 @@
 <?php namespace HynMe\Webserver\Generators\Webserver;
 
 use Config, File;
-use LaraLeague\MultiTenant\Models\Website;
+use Laraflock\MultiTenant\Models\Website;
 use HynMe\Webserver\Generators\AbstractFileGenerator;
 
 class Fpm extends AbstractFileGenerator

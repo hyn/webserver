@@ -37,7 +37,7 @@ class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
      */
 	public function __construct($website_id, $action = 'update')
 	{
-		$this->website = App::make('LaraLeague\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
+		$this->website = App::make('Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
         $this->action = $action;
 	}
 
