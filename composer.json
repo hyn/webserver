@@ -10,17 +10,17 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/hyn-me/multi-tenant/issues",
+        "issues": "https://github.com/laraflock/multi-tenant/issues",
         "source": "https://github.com/hyn-me/webserver",
         "docs": "http://hyn.me"
     },
     "require": {
         "php": ">=5.5.0",
         "hyn-me/framework": "*",
-        "phpseclib/phpseclib": "~0.3.10"
+        "phpseclib/phpseclib": "~2.0.0"
     },
     "suggest": {
-      "hyn-me/management-interface": "dev-master"
+      "hyn-me/management-interface": "*"
     },
     "autoload": {
         "psr-0": {
