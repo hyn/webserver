@@ -46,7 +46,7 @@ return [
         ],
         // mask for auto-generated config file that includes the tenant configurations
         'mask' => '%s.conf',
-        // include format using sprintf
+        // include format using sprintf to include the location of the storage/webserver/apache directory
         'include' => 'IncludeOptional %s*'
     ],
     /*
@@ -94,6 +94,7 @@ return [
             'reload' => '/etc/init.d/php5-fpm reload'
         ],
         'mask' => '%s.conf',
+        'include' => 'include=%s*;',
         /*
          * base modifier for fpm pool port
          * @example if base is 9000, will generate pool file for website Id 5 with port 9005
