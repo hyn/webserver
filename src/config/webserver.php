@@ -14,6 +14,13 @@ return [
         'path' => storage_path('webserver/ssl')
     ],
     /*
+     * Logging specific settings
+     */
+    'log' => [
+        // path where to store the webserver logs
+        'path' => storage_path('log')
+    ],
+    /*
      * Apache
      */
     'apache' => [

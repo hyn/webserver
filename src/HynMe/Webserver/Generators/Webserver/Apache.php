@@ -15,7 +15,7 @@ class Apache extends AbstractFileGenerator
         return view('webserver::webserver.apache.configuration', [
             'website' => $this->website,
             'public_path' => public_path(),
-            'log_path' => base_path("log/apache-{$this->website->id}-{$this->website->identifier}"),
+            'log_path' => Config::get('webserver.log.path') . "/apache-{$this->website->id}-{$this->website->identifier}",
             'base_path' => base_path(),
             'config' => Config::get('webserver.apache')
         ]);
