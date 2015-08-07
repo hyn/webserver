@@ -2,11 +2,11 @@
 
 use App;
 use HynMe\Webserver\Commands\WebserverCommand;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJob;
 
 class WebsiteObserver
 {
-    use DispatchesCommands;
+    use DispatchesJob;
 
     public function created($model)
     {
