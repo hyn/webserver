@@ -64,7 +64,7 @@ return [
         'service' => '/etc/init.d/nginx',
         // how to run actions for this service
         'actions' => [
-            'configtest' => '/etc/init.d/nginx -t',
+            'configtest' => '/etc/init.d/nginx configtest',
             'reload' => '/etc/init.d/nginx reload'
         ],
         'conf' => ['/etc/nginx/sites-enabled/'],
