@@ -10,6 +10,8 @@
 
 ;# listening for nginx proxying
 listen=127.0.0.1:{{ $config['port'] + $website->id }}
+listen.allowed_clients=127.0.0.1
+
 
 ;# user under which the application runs
 user={{ $user }}
