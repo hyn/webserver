@@ -19,9 +19,6 @@
         "hyn-me/framework": "*",
         "phpseclib/phpseclib": "~2.0.0"
     },
-    "suggest": {
-      "hyn-me/management-interface": "*"
-    },
     "autoload": {
         "psr-0": {
             "HynMe\\Webserver": "src/"
