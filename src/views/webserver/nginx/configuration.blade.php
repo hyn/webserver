@@ -1,5 +1,5 @@
 #
-#   Auto generated Apache configuration
+#   Auto generated Nginx configuration
 #       @time: {{ date('H:i:s d-m-Y') }}
 #       @author: hyn-me/webserver
 #       @website: {{ $website->id }} "{{ $website->present()->name }}"

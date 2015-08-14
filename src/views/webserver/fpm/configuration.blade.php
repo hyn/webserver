@@ -1,5 +1,5 @@
 ;#
-;#   Auto generated Nginx configuration
+;#   Auto generated Fpm configuration
 ;#       @time: {{ date('H:i:s d-m-Y') }}
 ;#       @author: hyn.me
 ;#       @website: {{ $website->id }} "{{ $website->present()->name }}"
