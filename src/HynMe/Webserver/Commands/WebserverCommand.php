@@ -16,8 +16,7 @@ use HynMe\Webserver\Generators\Unix\WebsiteUser;
 
 class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
 
-	use
-        InteractsWithQueue;
+	use InteractsWithQueue;
 
     /**
      * @var Website

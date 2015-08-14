@@ -21,7 +21,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
         $this->website = $website;
     }
     /**
-     * Writes the contents to disk
+     * Writes the contents to disk on Creation
      * @return int
      */
     public function onCreate()
@@ -36,6 +36,11 @@ abstract class AbstractFileGenerator extends AbstractGenerator
         ) && $this->serviceReload();
     }
 
+    /**
+     * Writes the contents to disk on Update
+     * @uses onCreate
+     * @return int
+     */
     public function onUpdate()
     {
         if($this->website->isDirty('identifier'))
@@ -50,16 +55,30 @@ abstract class AbstractFileGenerator extends AbstractGenerator
         return $this->onCreate();
     }
 
+    /**
+     * @param string $from
+     * @param string $to
+     * @return void
+     */
     public function onRename($from, $to)
     {
         // .. no implementation
     }
 
+    /**
+     * Action when deleting the Website
+     *
+     * @return bool
+     */
     public function onDelete()
     {
         return File::delete($this->publishPath()) && $this->serviceReload();
     }
 
+    /**
+     * The filename
+     * @return string
+     */
     public function name()
     {
         return sprintf("%d-%s", $this->website->id, $this->website->identifier);
