@@ -1,7 +1,6 @@
 <?php namespace HynMe\Webserver\Generators\Webserver;
 
-use Config, File;
-use Laraflock\MultiTenant\Models\Website;
+use Config;
 use HynMe\Webserver\Generators\AbstractFileGenerator;
 
 class Fpm extends AbstractFileGenerator
