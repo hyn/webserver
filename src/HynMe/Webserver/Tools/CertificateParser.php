@@ -1,4 +1,6 @@
-<?php namespace HynMe\Webserver\Tools;
+<?php
+
+namespace HynMe\Webserver\Tools;
 
 use Carbon\Carbon;
 use File_X509;
@@ -16,7 +18,7 @@ class CertificateParser
 
     public function __construct($certificate)
     {
-        $x509 = new File_X509;
+        $x509 = new File_X509();
         $x509result = $x509->loadX509($certificate);
 
         $this->x509 = $x509;
@@ -24,20 +26,21 @@ class CertificateParser
     }
 
     /**
-     * Loads all hostnames in the certificate
+     * Loads all hostnames in the certificate.
+     *
      * @return array
      */
     public function getHostnames()
     {
         // get all certificate alt names
         $altNames = $this->x509->getExtension('id-ce-subjectAltName');
-        if($altNames)
-            array_walk($altNames, function(&$value, $key)
-            {
+        if ($altNames) {
+            array_walk($altNames, function (&$value, $key) {
                 $value = $value['dNSName'];
             });
-        else
+        } else {
             $altNames = [];
+        }
 
         $hostnames = array_merge(
             $this->x509->getDNProp('CN') ?: [],
@@ -47,10 +50,9 @@ class CertificateParser
         return array_unique($hostnames);
     }
 
-
-
     /**
-     * Certificate signature algorithm
+     * Certificate signature algorithm.
+     *
      * @return string
      */
     public function getAlgorithm()
@@ -58,13 +60,13 @@ class CertificateParser
         return array_get($this->x509result, 'tbsCertificate.signature.algorithm');
     }
 
-
     /**
      * @return Carbon
      */
     public function getValidityFrom()
     {
         $validity = array_get($this->x509result, 'tbsCertificate.validity');
+
         return $validity ? new Carbon(array_get($validity, 'notBefore.utcTime')) : null;
     }
 
@@ -74,40 +76,45 @@ class CertificateParser
     public function getValidityTo()
     {
         $validity = array_get($this->x509result, 'tbsCertificate.validity');
+
         return $validity ? new Carbon(array_get($validity, 'notAfter.utcTime')) : null;
     }
 
     /**
-     * Checks whether certificate is SAN
+     * Checks whether certificate is SAN.
+     *
      * @return bool
      */
     public function isSAN()
     {
         $hostnames = $this->getHostnames();
         $uniqueHostnames = 0;
-        foreach($hostnames as $hostname)
-        {
+        foreach ($hostnames as $hostname) {
             // count www and non-www as one
             // count * and non-www as one
-            if(preg_match('/^((www)|\*)\.(?<parent>.*)$/', $hostname, $m) && in_array($m['parent'], $hostnames))
+            if (preg_match('/^((www)|\*)\.(?<parent>.*)$/', $hostname, $m) && in_array($m['parent'], $hostnames)) {
                 continue;
+            }
             $uniqueHostnames++;
         }
+
         return $uniqueHostnames > 1;
     }
 
     /**
-     * Checks whether certificate is or has wildcard
+     * Checks whether certificate is or has wildcard.
+     *
      * @return bool
      */
     public function isWildcard()
     {
         $hostnames = $this->getHostnames();
-        foreach($hostnames as $hostname)
-        {
-            if(substr($hostname, 0, 2) == "*.")
+        foreach ($hostnames as $hostname) {
+            if (substr($hostname, 0, 2) == '*.') {
                 return true;
+            }
         }
+
         return false;
     }
 }

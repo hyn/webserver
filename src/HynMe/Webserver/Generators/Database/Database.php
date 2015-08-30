@@ -1,12 +1,12 @@
-<?php namespace HynMe\Webserver\Generators\Database;
+<?php
 
-use Laraflock\MultiTenant\Models\Website;
-use Laraflock\MultiTenant\Tenant\DatabaseConnection;
+namespace HynMe\Webserver\Generators\Database;
+
 use HynMe\Webserver\Abstracts\AbstractGenerator;
+use Laraflock\MultiTenant\Models\Website;
 
 class Database extends AbstractGenerator
 {
-
     /**
      * @var Website
      */
@@ -31,6 +31,7 @@ class Database extends AbstractGenerator
     /**
      * @param string $from
      * @param string $to
+     *
      * @return bool
      */
     public function onRename($from, $to)

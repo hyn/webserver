@@ -1,8 +1,9 @@
-<?php namespace HynMe\Webserver\Abstracts;
+<?php
+
+namespace HynMe\Webserver\Abstracts;
 
 /**
- * Class AbstractGenerator
- * @package HynMe\Webserver\Abstracts
+ * Class AbstractGenerator.
  */
 abstract class AbstractGenerator
 {
@@ -14,6 +15,7 @@ abstract class AbstractGenerator
     /**
      * @param string $from
      * @param string $to
+     *
      * @return bool
      */
     abstract public function onRename($from, $to);

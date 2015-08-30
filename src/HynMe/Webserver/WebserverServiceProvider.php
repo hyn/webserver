@@ -1,19 +1,21 @@
-<?php namespace HynMe\Webserver;
+<?php
 
-use Laraflock\MultiTenant\Models\Website;
+namespace HynMe\Webserver;
+
 use HynMe\Webserver\Models\SslCertificate;
 use HynMe\Webserver\Models\SslHostname;
 use HynMe\Webserver\Repositories\SslRepository;
 use Illuminate\Support\ServiceProvider;
+use Laraflock\MultiTenant\Models\Website;
 
-class WebserverServiceProvider extends ServiceProvider {
-
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
+class WebserverServiceProvider extends ServiceProvider
+{
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
     public function boot()
     {
@@ -25,35 +27,33 @@ class WebserverServiceProvider extends ServiceProvider {
         // migrations
         $this->publishes([__DIR__.'/../../migrations/' => database_path('/migrations')], 'migrations');
 
-        Website::observe(new Observers\WebsiteObserver);
-        SslCertificate::observe(new Observers\SslCertificateObserver);
+        Website::observe(new Observers\WebsiteObserver());
+        SslCertificate::observe(new Observers\SslCertificateObserver());
 
         /*
          * Ssl repository
          */
-        $this->app->bind('HynMe\Webserver\Contracts\SslRepositoryContract', function($app)
-        {
-            return new SslRepository(new SslCertificate, new SslHostname());
+        $this->app->bind('HynMe\Webserver\Contracts\SslRepositoryContract', function ($app) {
+            return new SslRepository(new SslCertificate(), new SslHostname());
         });
     }
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-	}
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+    }
 
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return [];
-	}
-
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [];
+    }
 }

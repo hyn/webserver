@@ -1,19 +1,18 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class HwsSslHostnamesTable extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::connection('hyn')->create('ssl_hostnames', function(Blueprint $table)
-        {
+class HwsSslHostnamesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::connection('hyn')->create('ssl_hostnames', function (Blueprint $table) {
             $table->bigIncrements('id');
             // tenant owner
             $table->bigInteger('ssl_certificate_id')->unsigned();
@@ -38,16 +37,15 @@ class HwsSslHostnamesTable extends Migration {
 //            $table->foreign('hostname_id')->references('id')->on('hostnames')->onDelete('set null');
 
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::connection('hyn')->dropIfExists('ssl_hostnames');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::connection('hyn')->dropIfExists('ssl_hostnames');
+    }
 }

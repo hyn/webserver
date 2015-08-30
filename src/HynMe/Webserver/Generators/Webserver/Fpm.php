@@ -1,13 +1,15 @@
-<?php namespace HynMe\Webserver\Generators\Webserver;
+<?php
+
+namespace HynMe\Webserver\Generators\Webserver;
 
 use Config;
 use HynMe\Webserver\Generators\AbstractFileGenerator;
 
 class Fpm extends AbstractFileGenerator
 {
-
     /**
-     * Generates the view that is written
+     * Generates the view that is written.
+     *
      * @return \Illuminate\View\View
      */
     public function generate()
@@ -17,16 +19,17 @@ class Fpm extends AbstractFileGenerator
             'base_path' => base_path(),
             'user'      => $this->website->identifier,
             'group'     => Config::get('webserver.group'),
-            'config'    => Config::get('webserver.fpm')
+            'config'    => Config::get('webserver.fpm'),
         ]);
     }
 
     /**
-     * Provides the complete path to publish the generated content to
+     * Provides the complete path to publish the generated content to.
+     *
      * @return string
      */
     protected function publishPath()
     {
-        return sprintf("%s%s.conf", Config::get('webserver.fpm.path'), $this->name());
+        return sprintf('%s%s.conf', Config::get('webserver.fpm.path'), $this->name());
     }
 }

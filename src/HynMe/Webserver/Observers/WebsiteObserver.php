@@ -1,6 +1,7 @@
-<?php namespace HynMe\Webserver\Observers;
+<?php
 
-use App;
+namespace HynMe\Webserver\Observers;
+
 use HynMe\Webserver\Commands\WebserverCommand;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
