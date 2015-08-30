@@ -1,6 +1,8 @@
 <?php
+
 /**
- * All hyn-me/webserver related configuration options
+ * All hyn-me/webserver related configuration options.
+ *
  * @warning please be advised, read the documentation on http://hyn.me before editing
  *
  * None of the generated configurations will work as long as you don't add the paths to the corresponding webservice
@@ -10,15 +12,15 @@ return [
     'webservers' => ['nginx', 'apache'],
 
     'group' => 'www-data',
-    'ssl' => [
-        'path' => storage_path('webserver/ssl')
+    'ssl'   => [
+        'path' => storage_path('webserver/ssl'),
     ],
     /*
      * Logging specific settings
      */
     'log' => [
         // path where to store the webserver logs
-        'path' => storage_path('log')
+        'path' => storage_path('log'),
     ],
     /*
      * Apache
@@ -26,10 +28,10 @@ return [
     'apache' => [
         'path' => storage_path('webserver/apache/'),
         // class that runs functionality for this service
-        'class' => 'HynMe\Webserver\Generators\Webserver\Apache',
+        'class'   => 'HynMe\Webserver\Generators\Webserver\Apache',
         'enabled' => true,
-        'port' => [
-            'http' => 80,
+        'port'    => [
+            'http'  => 80,
             'https' => 443,
         ],
         // path to service daemon, used to verify service exists
@@ -37,63 +39,63 @@ return [
         // how to run actions for this service
         'actions' => [
             'configtest' => 'apache2ctl -t',
-            'reload' => 'apache2ctl graceful'
+            'reload'     => 'apache2ctl graceful',
         ],
         // system wide configuration directory
         'conf' => [
             // location for ubuntu 14.04 systems
-            '/etc/apache2/sites-enabled/'
+            '/etc/apache2/sites-enabled/',
         ],
         // mask for auto-generated config file that includes the tenant configurations
         'mask' => '%s.conf',
         // include format using sprintf to include the location of the storage/webserver/apache directory
-        'include' => 'IncludeOptional %s*'
+        'include' => 'IncludeOptional %s*',
     ],
     /*
      * Nginx
      */
     'nginx' => [
-        'path' => storage_path('webserver/nginx/'),
-        'class' => 'HynMe\Webserver\Generators\Webserver\Nginx',
+        'path'    => storage_path('webserver/nginx/'),
+        'class'   => 'HynMe\Webserver\Generators\Webserver\Nginx',
         'enabled' => true,
-        'port' => [
-            'http' => 80,
-            'https' => 443
+        'port'    => [
+            'http'  => 80,
+            'https' => 443,
         ],
         // path to service daemon, used to verify service exists
         'service' => '/etc/init.d/nginx',
         // how to run actions for this service
         'actions' => [
             'configtest' => '/etc/init.d/nginx configtest',
-            'reload' => '/etc/init.d/nginx reload'
+            'reload'     => '/etc/init.d/nginx reload',
         ],
-        'conf' => ['/etc/nginx/sites-enabled/'],
-        'mask' => '%s.conf',
+        'conf'    => ['/etc/nginx/sites-enabled/'],
+        'mask'    => '%s.conf',
         'include' => 'include %s*;',
         /*
          * the nginx service depends on fpm
          * during changes we will automatically trigger fpm as well
          */
         'depends' => [
-            'fpm'
-        ]
+            'fpm',
+        ],
     ],
     /*
      * PHP FPM
      */
     'fpm' => [
-        'path' => storage_path('webserver/fpm/'),
-        'class' => 'HynMe\Webserver\Generators\Webserver\Fpm',
+        'path'    => storage_path('webserver/fpm/'),
+        'class'   => 'HynMe\Webserver\Generators\Webserver\Fpm',
         'enabled' => true,
-        'conf' => ['/etc/php5/fpm/pool.d/'],
+        'conf'    => ['/etc/php5/fpm/pool.d/'],
         // path to service daemon, used to verify service exists
         'service' => '/etc/init.d/php5-fpm',
         // how to run actions for this service
         'actions' => [
             'configtest' => '/etc/init.d/php5-fpm -t',
-            'reload' => '/etc/init.d/php5-fpm reload'
+            'reload'     => '/etc/init.d/php5-fpm reload',
         ],
-        'mask' => '%s.conf',
+        'mask'    => '%s.conf',
         'include' => 'include=%s*;',
         /*
          * base modifier for fpm pool port
@@ -101,5 +103,5 @@ return [
          * @info this port is used in Nginx configurations for the PHP proxy
          */
         'port' => 9000,
-    ]
+    ],
 ];

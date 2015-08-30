@@ -1,4 +1,6 @@
-<?php namespace HynMe\Webserver\Generators\Webserver;
+<?php
+
+namespace HynMe\Webserver\Generators\Webserver;
 
 use File;
 use HynMe\Webserver\Abstracts\AbstractGenerator;
@@ -27,6 +29,7 @@ class Ssl extends AbstractGenerator
     /**
      * @param string $from
      * @param string $to
+     *
      * @return bool
      */
     public function onRename($from, $to)
@@ -36,22 +39,25 @@ class Ssl extends AbstractGenerator
     }
 
     /**
-     * Publish path for specific filetype
+     * Publish path for specific filetype.
+     *
      * @param string $postfix
+     *
      * @return string
      */
-    protected function publishPath($postfix = "key")
+    protected function publishPath($postfix = 'key')
     {
         return $this->certificate->publishPath($postfix);
     }
 
     /**
-     * Pem
+     * Pem.
+     *
      * @return string
      */
     protected function pem()
     {
-        return join("\r\n", [$this->certificate->certificate, $this->certificate->authority_bundle]);
+        return implode("\r\n", [$this->certificate->certificate, $this->certificate->authority_bundle]);
     }
 
     /**
@@ -82,5 +88,4 @@ class Ssl extends AbstractGenerator
             File::delete($this->publishPath('key'))
             && File::delete($this->publishPath('pem'));
     }
-
 }

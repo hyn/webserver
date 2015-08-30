@@ -1,8 +1,10 @@
-<?php namespace HynMe\Webserver\Observers;
+<?php
 
+namespace HynMe\Webserver\Observers;
+
+use HynMe\Webserver\Commands\SslCertificateCommand;
 use HynMe\Webserver\Models\SslHostname;
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use HynMe\Webserver\Commands\SslCertificateCommand;
 
 class SslCertificateObserver
 {
@@ -13,16 +15,13 @@ class SslCertificateObserver
      */
     public function creating($model)
     {
-
-        foreach(['certificate', 'authority_bundle', 'key'] as $attribute)
-        {
-            if($model->{$attribute})
+        foreach (['certificate', 'authority_bundle', 'key'] as $attribute) {
+            if ($model->{$attribute}) {
                 $model->{$attribute} = trim($model->{$attribute});
+            }
         }
 
-
-        if($model->x509)
-        {
+        if ($model->x509) {
             $model->validates_at = $model->x509->getValidityFrom();
             $model->invalidates_at = $model->x509->getValidityTo();
             $model->wildcard = $model->x509->isWildcard();
@@ -34,10 +33,8 @@ class SslCertificateObserver
      */
     public function created($model)
     {
-        if($model->x509)
-        {
-            foreach($model->x509->getHostnames() as $hostname)
-            {
+        if ($model->x509) {
+            foreach ($model->x509->getHostnames() as $hostname) {
                 $sslHostname = new SslHostname();
                 $sslHostname->ssl_certificate_id = $model->id;
                 $sslHostname->hostname = $hostname;

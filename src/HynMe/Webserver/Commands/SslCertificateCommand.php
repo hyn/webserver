@@ -1,19 +1,16 @@
-<?php namespace HynMe\Webserver\Commands;
+<?php
 
-use Illuminate\Console\Command;
+namespace HynMe\Webserver\Commands;
 
 use App;
-
-use HynMe\Webserver\Generators\Unix\WebsiteUser;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
+use HynMe\Webserver\Generators\Webserver\Ssl;
+use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Queue\InteractsWithQueue;
 
-use HynMe\Webserver\Generators\Webserver\Ssl;
-
-class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQueued {
-
+class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQueued
+{
     use
         InteractsWithQueue;
 
@@ -30,8 +27,8 @@ class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQue
     /**
      * Create a new command instance.
      *
-     * @param int                       $website_id
-     * @param string                    $action
+     * @param int    $website_id
+     * @param string $action
      */
     public function __construct($certificate_id, $action = 'update')
     {
@@ -46,12 +43,12 @@ class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQue
      */
     public function handle()
     {
-        if(!in_array($this->action, ['create', 'update', 'delete']))
+        if (!in_array($this->action, ['create', 'update', 'delete'])) {
             return;
+        }
 
-        $action = sprintf("on%s", ucfirst($this->action));
+        $action = sprintf('on%s', ucfirst($this->action));
 
         (new Ssl($this->certificate))->{$action}();
     }
-
 }

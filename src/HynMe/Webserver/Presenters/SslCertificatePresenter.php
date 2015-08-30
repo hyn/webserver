@@ -1,17 +1,21 @@
-<?php namespace HynMe\Webserver\Presenters;
+<?php
+
+namespace HynMe\Webserver\Presenters;
 
 use HynMe\Framework\Presenters\AbstractModelPresenter;
 
 class SslCertificatePresenter extends AbstractModelPresenter
 {
     /**
-     * Shows summary of hostnames
+     * Shows summary of hostnames.
+     *
      * @return string
      */
     public function hostnamesSummary()
     {
         $hostnames = $this->hostnames->lists('hostname')->all();
-        return implode(", ", array_splice($hostnames, 0, 5));
+
+        return implode(', ', array_splice($hostnames, 0, 5));
     }
 
     /**
@@ -35,7 +39,7 @@ class SslCertificatePresenter extends AbstractModelPresenter
      */
     public function name()
     {
-        return null;
+        return;
     }
     public function expiry()
     {

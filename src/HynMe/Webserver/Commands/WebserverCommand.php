@@ -1,22 +1,22 @@
-<?php namespace HynMe\Webserver\Commands;
+<?php
+
+namespace HynMe\Webserver\Commands;
 
 use App;
-
-use Illuminate\Console\Command;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
-
 use HynMe\Webserver\Generators\Database\Database;
+use HynMe\Webserver\Generators\Unix\WebsiteUser;
+use HynMe\Webserver\Generators\Webserver\Apache;
 use HynMe\Webserver\Generators\Webserver\Fpm;
 use HynMe\Webserver\Generators\Webserver\Nginx;
 use HynMe\Webserver\Generators\Webserver\Ssl;
-use HynMe\Webserver\Generators\Webserver\Apache;
-use HynMe\Webserver\Generators\Unix\WebsiteUser;
+use Illuminate\Console\Command;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Queue\InteractsWithQueue;
 
-class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
-
-	use InteractsWithQueue;
+class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued
+{
+    use InteractsWithQueue;
 
     /**
      * @var Website
@@ -31,29 +31,29 @@ class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
     /**
      * Create a new command instance.
      *
-     * @param int                       $website_id
-     * @param string                    $action
+     * @param int    $website_id
+     * @param string $action
      */
-	public function __construct($website_id, $action = 'update')
-	{
-		$this->website = App::make('Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
+    public function __construct($website_id, $action = 'update')
+    {
+        $this->website = App::make('Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
         $this->action = $action;
-	}
+    }
 
-	/**
-	 * Execute the command.
-	 *
-	 * @return void
-	 */
-	public function handle()
-	{
-        if(!in_array($this->action, ['create', 'update', 'delete']))
+    /**
+     * Execute the command.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        if (!in_array($this->action, ['create', 'update', 'delete'])) {
             return;
+        }
 
-        $action = sprintf("on%s", ucfirst($this->action));
+        $action = sprintf('on%s', ucfirst($this->action));
 
-        foreach($this->website->hostnamesWithCertificate as $hostname)
-        {
+        foreach ($this->website->hostnamesWithCertificate as $hostname) {
             (new Ssl($hostname->certificate))->onUpdate();
         }
 
@@ -63,6 +63,5 @@ class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued {
         (new Fpm($this->website))->{$action}();
 
         (new Database($this->website))->{$action}();
-	}
-
+    }
 }

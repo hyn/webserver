@@ -1,11 +1,12 @@
-<?php namespace HynMe\Webserver\Generators\Unix;
+<?php
 
-use Laraflock\MultiTenant\Models\Website;
+namespace HynMe\Webserver\Generators\Unix;
+
 use HynMe\Webserver\Generators\AbstractUserGenerator;
+use Laraflock\MultiTenant\Models\Website;
 
 class WebsiteUser extends AbstractUserGenerator
 {
-
     /**
      * @var Website
      */
@@ -19,9 +20,9 @@ class WebsiteUser extends AbstractUserGenerator
     }
 
     /**
-     * Creates the user on the service
+     * Creates the user on the service.
      *
-     * @return boolean
+     * @return bool
      */
     public function onCreate()
     {
@@ -30,28 +31,28 @@ class WebsiteUser extends AbstractUserGenerator
             base_path()));
     }
 
-
     /**
      * @return bool
      */
     public function onUpdate()
     {
-        if($this->website->isDirty('identifier'))
+        if ($this->website->isDirty('identifier')) {
             return $this->onRename($this->website->getOriginal('identifier'), $this->website->name());
+        }
     }
 
     /**
-     * Removes the user from the service
+     * Removes the user from the service.
      *
-     * @return boolean
+     * @return bool
      */
     public function onDelete()
     {
-        return exec(sprintf("deluser %s", $this->name()));
+        return exec(sprintf('deluser %s', $this->name()));
     }
 
     /**
-     * Unique username
+     * Unique username.
      *
      * @return string
      */
@@ -61,9 +62,9 @@ class WebsiteUser extends AbstractUserGenerator
     }
 
     /**
-     * Renames a user
+     * Renames a user.
      *
-     * @return boolean
+     * @return bool
      */
     public function onRename($from, $to)
     {

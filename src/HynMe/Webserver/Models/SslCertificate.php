@@ -1,9 +1,11 @@
-<?php namespace HynMe\Webserver\Models;
+<?php
+
+namespace HynMe\Webserver\Models;
 
 use Config;
-use Laraflock\MultiTenant\Abstracts\Models\SystemModel;
 use HynMe\Webserver\Tools\CertificateParser;
 use Laracasts\Presenter\PresentableTrait;
+use Laraflock\MultiTenant\Abstracts\Models\SystemModel;
 
 class SslCertificate extends SystemModel
 {
@@ -33,9 +35,9 @@ class SslCertificate extends SystemModel
         return $this->hasMany(SslHostname::class);
     }
 
-    public function publishPath($postfix = "key")
+    public function publishPath($postfix = 'key')
     {
-        return sprintf("%s/%s/certificate.%s", Config::get('webserver.ssl.path'), $this->id, $postfix);
+        return sprintf('%s/%s/certificate.%s', Config::get('webserver.ssl.path'), $this->id, $postfix);
     }
 
     public function getPathKeyAttribute()
