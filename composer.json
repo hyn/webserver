@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.5.0",
         "hyn-me/framework": "*",
-        "phpseclib/phpseclib": "*"
+        "phpseclib/phpseclib": "^2.0"
     },
     "autoload": {
         "psr-0": {
