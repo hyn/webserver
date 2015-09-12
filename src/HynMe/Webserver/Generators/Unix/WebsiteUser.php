@@ -11,6 +11,7 @@ class WebsiteUser extends AbstractUserGenerator
      * @var Website
      */
     protected $website;
+
     /**
      * @param Website $website
      */

@@ -21,6 +21,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
     {
         $this->website = $website;
     }
+
     /**
      * Writes the contents to disk on Creation.
      *
@@ -97,6 +98,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      * @return \Illuminate\View\View
      */
     abstract public function generate();
+
     /**
      * Provides the complete path to publish the generated content to.
      *
