@@ -41,6 +41,7 @@ class SslCertificatePresenter extends AbstractModelPresenter
     {
         return;
     }
+
     public function expiry()
     {
         return $this->invalidates_at->isPast() ? trans('management-interface::ssl.is_expired') : $this->invalidates_at->diffForHumans(null, true);
