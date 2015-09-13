@@ -24,8 +24,10 @@
     # default document handling
     DirectoryIndex index.html index.php
 
+    @if ($website->websiteUser)
     # user
-    #    RUidGid {{ $website->identifier }} users
+        RUidGid {{ $website->websiteUser }} {{ config('webserver.group', 'users') }}
+    @endif
 
     @if($website->directory->media())
         # media directory
@@ -67,8 +69,10 @@
     # default document handling
     DirectoryIndex index.html index.php
 
-    # user
-    #    RUidGid {{ $website->identifier }} users
+    @if ($website->websiteUser)
+        # user
+        RUidGid {{ $website->websiteUser }} {{ config('webserver.group', 'users') }}
+    @endif
 
     @if($website->directory->media)
         # media directory

@@ -14,10 +14,10 @@ listen.allowed_clients=127.0.0.1
 
 
 ;# user under which the application runs
-user={{ $user }}
+user={{ $website->websiteUser }}
 
 ;# group under which the application runs
-group=users
+group={{ config('webserver.group', 'users') }}
 
 ;# fpm pool management variables
 pm=dynamic

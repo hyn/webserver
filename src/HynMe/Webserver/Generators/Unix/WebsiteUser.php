@@ -64,10 +64,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function name()
     {
-        if(config('webserver.default-user') === true) {
-            return $this->website->identifier;
-        }
-        return config('webserver.default-user');
+        return $this->website->wesiteUser;
     }
 
     /**
