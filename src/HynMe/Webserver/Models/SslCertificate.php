@@ -44,6 +44,7 @@ class SslCertificate extends SystemModel
     {
         return $this->publishPath('key');
     }
+
     public function getPathPemAttribute()
     {
         return $this->publishPath('pem');
