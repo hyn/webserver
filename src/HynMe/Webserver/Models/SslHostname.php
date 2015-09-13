@@ -10,6 +10,7 @@ class SslHostname extends SystemModel
     use PresentableTrait;
 
     protected $presenter = 'HynMe\Webserver\Presenters\SslHostnamePresenter';
+
     /**
      * @return SslCertificate
      */
