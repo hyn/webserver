@@ -11,7 +11,17 @@
 return [
     'webservers' => ['nginx', 'apache'],
 
+    /*
+     * If tenant files should belong to a certain user, set the `default-user` value to that username
+     *      - true will generate a username automatically based on the website
+     *      - null will disable generating users
+     */
+    'default-user' => true,
     'group' => 'www-data',
+
+    /*
+     * SSL
+     */
     'ssl'   => [
         'path' => storage_path('webserver/ssl'),
     ],
@@ -20,7 +30,7 @@ return [
      */
     'log' => [
         // path where to store the webserver logs
-        'path' => storage_path('log'),
+        'path' => storage_path('logs'),
     ],
     /*
      * Apache

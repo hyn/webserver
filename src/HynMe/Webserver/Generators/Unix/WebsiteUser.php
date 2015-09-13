@@ -26,9 +26,12 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onCreate()
     {
-        return exec(sprintf('adduser %s --home %s --no-create-home --disabled-password --disabled-login --gecos ""',
-            $this->name(),
-            base_path()));
+        if($this->name()) {
+            return exec(sprintf('adduser %s --home %s --ingroup %s --no-create-home --disabled-password --disabled-login --gecos ""',
+                $this->name(),
+                config('webserver.group'),
+                base_path()));
+        }
     }
 
     /**
@@ -36,7 +39,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onUpdate()
     {
-        if ($this->website->isDirty('identifier')) {
+        if ($this->name() && $this->website->isDirty('identifier')) {
             return $this->onRename($this->website->getOriginal('identifier'), $this->website->name());
         }
     }
@@ -48,7 +51,9 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onDelete()
     {
-        return exec(sprintf('deluser %s', $this->name()));
+        if($this->name()) {
+            return exec(sprintf('deluser %s', $this->name()));
+        }
     }
 
     /**
@@ -58,7 +63,10 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function name()
     {
-        return $this->website->identifier;
+        if(config('webserver.default-user') === true) {
+            return $this->website->identifier;
+        }
+        return config('webserver.default-user');
     }
 
     /**
@@ -68,6 +76,8 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onRename($from, $to)
     {
-        return exec(sprintf('usermod -l %s %s', $to, $from));
+        if($this->name()) {
+            return exec(sprintf('usermod -l %s %s', $to, $from));
+        }
     }
 }
