@@ -27,7 +27,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onCreate()
     {
-        if($this->name()) {
+        if ($this->name()) {
             return exec(sprintf('adduser %s --home %s --ingroup %s --no-create-home --disabled-password --disabled-login --gecos ""',
                 $this->name(),
                 config('webserver.group'),
@@ -52,7 +52,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onDelete()
     {
-        if($this->name()) {
+        if ($this->name()) {
             return exec(sprintf('deluser %s', $this->name()));
         }
     }
@@ -74,7 +74,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onRename($from, $to)
     {
-        if($this->name()) {
+        if ($this->name()) {
             return exec(sprintf('usermod -l %s %s', $to, $from));
         }
     }

@@ -113,7 +113,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      */
     protected function serviceReload()
     {
-        if (!$this->isInstalled()) {
+        if (! $this->isInstalled()) {
             return;
         }
 
@@ -148,7 +148,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
     public function configuration()
     {
         $configuration = config('webserver');
-        if (!$configuration || !array_has($configuration, $this->baseName())) {
+        if (! $configuration || ! array_has($configuration, $this->baseName())) {
             throw new \Exception("No configuration for {$this->baseName()}");
         }
 
@@ -172,7 +172,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
      */
     public function register()
     {
-        if (!$this->isInstalled()) {
+        if (! $this->isInstalled()) {
             return;
         }
 
@@ -217,7 +217,7 @@ abstract class AbstractFileGenerator extends AbstractGenerator
     protected function findPathForRegistration($paths = [])
     {
         foreach ($paths as $path) {
-            if (!empty($path) && File::isDirectory($path)) {
+            if (! empty($path) && File::isDirectory($path)) {
                 return $path;
             }
         }

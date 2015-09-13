@@ -28,7 +28,7 @@ class ServerConfigurationHelper
         foreach (config('webserver') as $key => $params) {
             $path = array_get($params, 'path');
 
-            if ($path && !File::isDirectory($path)) {
+            if ($path && ! File::isDirectory($path)) {
                 File::makeDirectory($path, 0755, true);
             }
         }
