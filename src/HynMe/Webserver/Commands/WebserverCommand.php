@@ -47,7 +47,7 @@ class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued
      */
     public function handle()
     {
-        if (!in_array($this->action, ['create', 'update', 'delete'])) {
+        if (! in_array($this->action, ['create', 'update', 'delete'])) {
             return;
         }
 

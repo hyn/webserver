@@ -43,7 +43,7 @@ class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQue
      */
     public function handle()
     {
-        if (!in_array($this->action, ['create', 'update', 'delete'])) {
+        if (! in_array($this->action, ['create', 'update', 'delete'])) {
             return;
         }
 
