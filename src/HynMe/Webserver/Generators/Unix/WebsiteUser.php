@@ -30,8 +30,8 @@ class WebsiteUser extends AbstractUserGenerator
         if ($this->name()) {
             return exec(sprintf('adduser %s --home %s --ingroup %s --no-create-home --disabled-password --disabled-login --gecos ""',
                 $this->name(),
-                config('webserver.group'),
-                base_path()));
+                base_path(),
+                config('webserver.group')));
         }
     }
 
@@ -64,7 +64,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function name()
     {
-        return $this->website->wesiteUser;
+        return $this->website->websiteUser;
     }
 
     /**
