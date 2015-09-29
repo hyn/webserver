@@ -11,10 +11,10 @@ use HynMe\Webserver\Generators\Webserver\Nginx;
 use HynMe\Webserver\Generators\Webserver\Ssl;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class WebserverCommand extends Command implements SelfHandling, ShouldBeQueued
+class WebserverCommand extends Command implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue;
 
