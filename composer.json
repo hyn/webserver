@@ -20,10 +20,9 @@
         "phpseclib/phpseclib": "^2.0"
     },
     "autoload": {
-        "psr-0": {
-            "HynMe\\Webserver": "src/"
+        "psr-4": {
+            "HynMe\\Webserver\\": "src/"
         }
     },
-    "minimum-stability": "dev",
     "prefer-stable": true
 }
