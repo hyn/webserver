@@ -78,4 +78,17 @@ class WebsiteUser extends AbstractUserGenerator
             return exec(sprintf('usermod -l %s %s', $to, $from));
         }
     }
+
+    /**
+     * Tests whether a user exists.
+     *
+     * @return bool
+     */
+    public function exists()
+    {
+        if($this->name()) {
+            exec(sprintf('getent passwd %s', $this->name()), $out);
+            return count($out) > 0;
+        }
+    }
 }
