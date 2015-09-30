@@ -86,8 +86,9 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function exists()
     {
-        if($this->name()) {
+        if ($this->name()) {
             exec(sprintf('getent passwd %s', $this->name()), $out);
+
             return count($out) > 0;
         }
     }

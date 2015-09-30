@@ -1,4 +1,6 @@
-<?php namespace HynMe\Webserver\Tests;
+<?php
+
+namespace HynMe\Webserver\Tests;
 
 use HynMe\Webserver\Commands\WebserverCommand;
 use Illuminate\Database\Eloquent\Factory;
@@ -9,12 +11,13 @@ use Faker\Generator;
 use Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract;
 use Mockery;
 
-class WebsiteUserTest extends TestCase {
-
+class WebsiteUserTest extends TestCase
+{
     /**
-     * Tests the functionality of creating
+     * Tests the functionality of creating.
      */
-    public function testWebserverCommandCreate() {
+    public function testWebserverCommandCreate()
+    {
         $command = new WebserverCommand(1, 'create');
 
         $command->handle();
@@ -33,8 +36,8 @@ class WebsiteUserTest extends TestCase {
 
         $app->make(Kernel::class)->bootstrap();
 
-        $app->singleton(Factory::class, function() {
-            return Factory::construct(new Generator(), __DIR__ . '/../database/factories');
+        $app->singleton(Factory::class, function () {
+            return Factory::construct(new Generator(), __DIR__.'/../database/factories');
         });
 
         return $app;
