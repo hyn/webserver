@@ -21,7 +21,9 @@
         "laraflock/multi-tenant": "^0.6"
     },
     "require-dev": {
-        "mockery/mockery": "*"
+        "mockery/mockery": "*",
+        "fzaninotto/faker": "*",
+        "laravel/laravel": "5.1.*"
     },
     "autoload": {
         "psr-4": {

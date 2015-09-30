@@ -2,7 +2,6 @@
 
 namespace HynMe\Webserver\Commands;
 
-use App;
 use HynMe\Webserver\Generators\Database\Database;
 use HynMe\Webserver\Generators\Unix\WebsiteUser;
 use HynMe\Webserver\Generators\Webserver\Apache;
@@ -36,7 +35,7 @@ class WebserverCommand extends Command implements SelfHandling, ShouldQueue
      */
     public function __construct($website_id, $action = 'update')
     {
-        $this->website = App::make('Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
+        $this->website = app('Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
         $this->action = $action;
     }
 

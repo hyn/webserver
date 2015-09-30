@@ -25,7 +25,7 @@ class WebserverServiceProvider extends ServiceProvider
         // adds views
         $this->loadViewsFrom(__DIR__.'/../views', 'webserver');
         // migrations
-        $this->publishes([__DIR__.'/../migrations/' => database_path('/migrations')], 'migrations');
+        $this->publishes([__DIR__.'/../database/migrations/' => database_path('/migrations')], 'migrations');
 
         Website::observe(new Observers\WebsiteObserver());
         SslCertificate::observe(new Observers\SslCertificateObserver());
