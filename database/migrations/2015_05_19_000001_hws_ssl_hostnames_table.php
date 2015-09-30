@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Laraflock\MultiTenant\Tenant\DatabaseConnection;
 
 class HwsSslHostnamesTable extends Migration
 {
@@ -12,7 +13,7 @@ class HwsSslHostnamesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('hyn')->create('ssl_hostnames', function (Blueprint $table) {
+        Schema::connection(DatabaseConnection::systemConnectionName())->create('ssl_hostnames', function (Blueprint $table) {
             $table->bigIncrements('id');
             // tenant owner
             $table->bigInteger('ssl_certificate_id')->unsigned();
@@ -46,6 +47,6 @@ class HwsSslHostnamesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('hyn')->dropIfExists('ssl_hostnames');
+        Schema::connection(DatabaseConnection::systemConnectionName())->dropIfExists('ssl_hostnames');
     }
 }

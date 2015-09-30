@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Laraflock\MultiTenant\Tenant\DatabaseConnection;
 
 class HwsSslCertificatesTable extends Migration
 {
@@ -12,7 +13,7 @@ class HwsSslCertificatesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('hyn')->create('ssl_certificates', function (Blueprint $table) {
+        Schema::connection(DatabaseConnection::systemConnectionName())->create('ssl_certificates', function (Blueprint $table) {
             $table->bigIncrements('id');
             // tenant owner
             $table->bigInteger('tenant_id')->unsigned();
@@ -49,6 +50,6 @@ class HwsSslCertificatesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('hyn')->dropIfExists('ssl_certificates');
+        Schema::connection(DatabaseConnection::systemConnectionName())->dropIfExists('ssl_certificates');
     }
 }
