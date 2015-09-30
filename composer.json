@@ -17,7 +17,11 @@
     "require": {
         "php": ">=5.5.0",
         "hyn-me/framework": "*",
-        "phpseclib/phpseclib": "^2.0"
+        "phpseclib/phpseclib": "^2.0",
+        "laraflock/multi-tenant": "^0.6"
+    },
+    "require-dev": {
+        "mockery/mockery": "*"
     },
     "autoload": {
         "psr-4": {
