@@ -43,6 +43,9 @@ class WebsiteUserTest extends TestCase
         return $app;
     }
 
+    /**
+     * Sets up prerequisites
+     */
     public function setUp()
     {
         parent::setUp();
