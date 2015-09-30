@@ -4,11 +4,11 @@ namespace HynMe\Webserver\Observers;
 
 use HynMe\Webserver\Commands\SslCertificateCommand;
 use HynMe\Webserver\Models\SslHostname;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class SslCertificateObserver
 {
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * @param \HynMe\Webserver\Models\SslCertificate $model
