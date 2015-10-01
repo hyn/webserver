@@ -40,6 +40,21 @@ class WebsiteUserTest extends TestCase
             return Factory::construct(new Generator(), __DIR__.'/../database/factories');
         });
 
+        $app['config']->set('database.connections.tenant', [
+            'driver' => 'psql',
+            'database' => database_path('tenant.psql')
+        ]);
+
+        $app['config']->set('database.connections.hyn', [
+            'driver' => 'psql',
+            'database' => database_path('system.psql')
+        ]);
+
+        $app['config']->set('database.default', 'hyn');
+
+        touch(database_path('tenant.psql'));
+        touch(database_path('system.psql'));
+
         return $app;
     }
 
