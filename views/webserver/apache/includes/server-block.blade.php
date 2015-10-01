@@ -88,9 +88,9 @@
 
     # enable SSL
     SSLEngine On
-    SSLCertificateFile {{ $ssl->publishPath('crt') }}
-    SSLCertificateChainFile {{ $ssl->publishPath('ca') }}
-    SSLCertificateKeyFile {{ $ssl->publishPath('key') }}
+    SSLCertificateFile {{ $ssl->pathCrt }}
+    SSLCertificateChainFile {{ $ssl->pathCa }}
+    SSLCertificateKeyFile {{ $ssl->pathKey }}
 
     <FilesMatch "\.(cgi|shtml|phtml|php)$">
     SSLOptions +StdEnvVars

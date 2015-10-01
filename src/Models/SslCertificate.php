@@ -15,7 +15,7 @@ class SslCertificate extends SystemModel
 
     protected $fillable = ['tenant_id', 'certificate', 'authority_bundle'];
 
-    protected $appends = ['pathKey', 'pathPem'];
+    protected $appends = ['pathKey', 'pathPem' ,'pathCrt', 'pathCa'];
 
     public function getDates()
     {
@@ -48,5 +48,15 @@ class SslCertificate extends SystemModel
     public function getPathPemAttribute()
     {
         return $this->publishPath('pem');
+    }
+
+    public function getPathCrtAttribute()
+    {
+        return $this->publishPath('crt');
+    }
+
+    public function getPathCaAttribute()
+    {
+        return $this->publishPath('ca');
     }
 }
