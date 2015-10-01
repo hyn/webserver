@@ -17,8 +17,7 @@
     "require": {
         "php" : ">=5.5.9",
         "laraflock/multi-tenant": "*",
-        "phpseclib/phpseclib": "^2.0",
-        "laraflock/multi-tenant": "^0.6"
+        "phpseclib/phpseclib": "^2.0"
     },
     "require-dev": {
         "mockery/mockery": "*",
@@ -28,6 +27,11 @@
     "autoload": {
         "psr-4": {
             "Hyn\\Webserver\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     },
     "prefer-stable": true
