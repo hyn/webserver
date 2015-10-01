@@ -68,6 +68,8 @@ class Ssl extends AbstractGenerator
         return
             (! File::isDirectory(dirname($this->publishPath('pem'))) && File::makeDirectory(dirname($this->publishPath('pem'))))
             && File::put($this->publishPath('key'), $this->certificate->key)
+            && File::put($this->publishPath('crt'), $this->certificate->certificate)
+            && File::put($this->publishPath('ca'), $this->certificate->authority_bundle)
             && File::put($this->publishPath('pem'), $this->pem());
     }
 
