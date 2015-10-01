@@ -59,7 +59,7 @@ class WebsiteUserTest extends TestCase
     }
 
     /**
-     * Sets up prerequisites
+     * Sets up prerequisites.
      */
     public function setUp()
     {
