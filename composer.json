@@ -1,5 +1,5 @@
 {
-    "name": "hyn-me/webserver",
+    "name": "hyn/webserver",
     "description": "Management and configuration of webserver",
     "tags": ["laravel", "hyn-me", "webserver"],
     "license": "MIT",
