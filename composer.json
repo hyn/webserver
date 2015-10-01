@@ -15,8 +15,8 @@
         "docs": "http://hyn.me"
     },
     "require": {
-        "php": ">=5.5.0",
-        "hyn/framework": "*",
+        "php" : ">=5.5.9",
+        "laraflock/multi-tenant": "*",
         "phpseclib/phpseclib": "^2.0",
         "laraflock/multi-tenant": "^0.6"
     },
