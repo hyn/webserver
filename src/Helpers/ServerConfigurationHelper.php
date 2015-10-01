@@ -1,6 +1,6 @@
 <?php
 
-namespace HynMe\Webserver\Helpers;
+namespace Hyn\Webserver\Helpers;
 
 use File;
 

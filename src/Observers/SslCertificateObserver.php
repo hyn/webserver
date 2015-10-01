@@ -1,9 +1,9 @@
 <?php
 
-namespace HynMe\Webserver\Observers;
+namespace Hyn\Webserver\Observers;
 
-use HynMe\Webserver\Commands\SslCertificateCommand;
-use HynMe\Webserver\Models\SslHostname;
+use Hyn\Webserver\Commands\SslCertificateCommand;
+use Hyn\Webserver\Models\SslHostname;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class SslCertificateObserver
@@ -11,7 +11,7 @@ class SslCertificateObserver
     use DispatchesJobs;
 
     /**
-     * @param \HynMe\Webserver\Models\SslCertificate $model
+     * @param \Hyn\Webserver\Models\SslCertificate $model
      */
     public function creating($model)
     {
@@ -29,7 +29,7 @@ class SslCertificateObserver
     }
 
     /**
-     * @param \HynMe\Webserver\Models\SslCertificate $model
+     * @param \Hyn\Webserver\Models\SslCertificate $model
      */
     public function created($model)
     {

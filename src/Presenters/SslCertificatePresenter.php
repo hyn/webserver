@@ -1,8 +1,8 @@
 <?php
 
-namespace HynMe\Webserver\Presenters;
+namespace Hyn\Webserver\Presenters;
 
-use HynMe\Framework\Presenters\AbstractModelPresenter;
+use Hyn\Framework\Presenters\AbstractModelPresenter;
 
 class SslCertificatePresenter extends AbstractModelPresenter
 {

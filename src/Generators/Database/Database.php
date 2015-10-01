@@ -1,8 +1,8 @@
 <?php
 
-namespace HynMe\Webserver\Generators\Database;
+namespace Hyn\Webserver\Generators\Database;
 
-use HynMe\Webserver\Abstracts\AbstractGenerator;
+use Hyn\Webserver\Abstracts\AbstractGenerator;
 use Laraflock\MultiTenant\Models\Website;
 
 class Database extends AbstractGenerator

@@ -1,10 +1,10 @@
 <?php
 
-namespace HynMe\Webserver;
+namespace Hyn\Webserver;
 
-use HynMe\Webserver\Models\SslCertificate;
-use HynMe\Webserver\Models\SslHostname;
-use HynMe\Webserver\Repositories\SslRepository;
+use Hyn\Webserver\Models\SslCertificate;
+use Hyn\Webserver\Models\SslHostname;
+use Hyn\Webserver\Repositories\SslRepository;
 use Illuminate\Support\ServiceProvider;
 use Laraflock\MultiTenant\Models\Website;
 
@@ -33,7 +33,7 @@ class WebserverServiceProvider extends ServiceProvider
         /*
          * Ssl repository
          */
-        $this->app->bind('HynMe\Webserver\Contracts\SslRepositoryContract', function ($app) {
+        $this->app->bind('Hyn\Webserver\Contracts\SslRepositoryContract', function ($app) {
             return new SslRepository(new SslCertificate(), new SslHostname());
         });
     }

@@ -1,7 +1,7 @@
 {
     "name": "hyn/webserver",
     "description": "Management and configuration of webserver",
-    "tags": ["laravel", "hyn-me", "webserver"],
+    "tags": ["laravel", "hyn", "webserver"],
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=5.5.0",
-        "hyn-me/framework": "*",
+        "hyn/framework": "*",
         "phpseclib/phpseclib": "^2.0",
         "laraflock/multi-tenant": "^0.6"
     },
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "HynMe\\Webserver\\": "src/"
+            "Hyn\\Webserver\\": "src/"
         }
     },
     "prefer-stable": true

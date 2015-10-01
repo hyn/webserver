@@ -1,8 +1,8 @@
 <?php
 
-namespace HynMe\Webserver\Generators\Unix;
+namespace Hyn\Webserver\Generators\Unix;
 
-use HynMe\Webserver\Generators\AbstractUserGenerator;
+use Hyn\Webserver\Generators\AbstractUserGenerator;
 use Laraflock\MultiTenant\Models\Website;
 
 class WebsiteUser extends AbstractUserGenerator

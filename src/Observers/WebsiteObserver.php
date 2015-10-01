@@ -1,8 +1,8 @@
 <?php
 
-namespace HynMe\Webserver\Observers;
+namespace Hyn\Webserver\Observers;
 
-use HynMe\Webserver\Commands\WebserverCommand;
+use Hyn\Webserver\Commands\WebserverCommand;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class WebsiteObserver

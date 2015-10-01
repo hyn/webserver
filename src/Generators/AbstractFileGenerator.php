@@ -1,9 +1,9 @@
 <?php
 
-namespace HynMe\Webserver\Generators;
+namespace Hyn\Webserver\Generators;
 
 use File;
-use HynMe\Webserver\Abstracts\AbstractGenerator;
+use Hyn\Webserver\Abstracts\AbstractGenerator;
 use Laraflock\MultiTenant\Models\Website;
 use ReflectionClass;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HynMe\Webserver\Models;
+namespace Hyn\Webserver\Models;
 
 use Laracasts\Presenter\PresentableTrait;
 use Laraflock\MultiTenant\Abstracts\Models\SystemModel;
@@ -9,7 +9,7 @@ class SslHostname extends SystemModel
 {
     use PresentableTrait;
 
-    protected $presenter = 'HynMe\Webserver\Presenters\SslHostnamePresenter';
+    protected $presenter = 'Hyn\Webserver\Presenters\SslHostnamePresenter';
 
     /**
      * @return SslCertificate

@@ -1,9 +1,9 @@
 <?php
 
-namespace HynMe\Webserver\Generators\Webserver;
+namespace Hyn\Webserver\Generators\Webserver;
 
 use Config;
-use HynMe\Webserver\Generators\AbstractFileGenerator;
+use Hyn\Webserver\Generators\AbstractFileGenerator;
 
 class Fpm extends AbstractFileGenerator
 {

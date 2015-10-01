@@ -1,8 +1,8 @@
 <?php
 
-namespace HynMe\Webserver\Tests;
+namespace Hyn\Webserver\Tests;
 
-use HynMe\Webserver\Commands\WebserverCommand;
+use Hyn\Webserver\Commands\WebserverCommand;
 use Illuminate\Database\Eloquent\Factory;
 use Laraflock\MultiTenant\Models\Website;
 use Illuminate\Foundation\Testing\TestCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace HynMe\Webserver\Tools;
+namespace Hyn\Webserver\Tools;
 
 use Carbon\Carbon;
 use File_X509;

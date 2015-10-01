@@ -38,7 +38,7 @@ return [
     'apache' => [
         'path' => storage_path('webserver/apache/'),
         // class that runs functionality for this service
-        'class'   => 'HynMe\Webserver\Generators\Webserver\Apache',
+        'class'   => 'Hyn\Webserver\Generators\Webserver\Apache',
         'enabled' => true,
         'port'    => [
             'http'  => 80,
@@ -66,7 +66,7 @@ return [
      */
     'nginx' => [
         'path'    => storage_path('webserver/nginx/'),
-        'class'   => 'HynMe\Webserver\Generators\Webserver\Nginx',
+        'class'   => 'Hyn\Webserver\Generators\Webserver\Nginx',
         'enabled' => true,
         'port'    => [
             'http'  => 80,
@@ -95,7 +95,7 @@ return [
      */
     'fpm' => [
         'path'    => storage_path('webserver/fpm/'),
-        'class'   => 'HynMe\Webserver\Generators\Webserver\Fpm',
+        'class'   => 'Hyn\Webserver\Generators\Webserver\Fpm',
         'enabled' => true,
         'conf'    => ['/etc/php5/fpm/pool.d/'],
         // path to service daemon, used to verify service exists

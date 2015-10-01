@@ -1,8 +1,8 @@
 <?php
 
-namespace HynMe\Webserver\Contracts;
+namespace Hyn\Webserver\Contracts;
 
-use HynMe\Framework\Contracts\BaseRepositoryContract;
+use Hyn\Framework\Contracts\BaseRepositoryContract;
 use Laraflock\MultiTenant\Models\Hostname;
 
 interface SslRepositoryContract extends BaseRepositoryContract
@@ -10,7 +10,7 @@ interface SslRepositoryContract extends BaseRepositoryContract
     /**
      * @param Hostname $hostname
      *
-     * @return \HynMe\Webserver\Models\SslCertificate
+     * @return \Hyn\Webserver\Models\SslCertificate
      */
     public function findByHostname(Hostname $hostname);
 }

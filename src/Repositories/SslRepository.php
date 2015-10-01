@@ -1,9 +1,9 @@
 <?php
 
-namespace HynMe\Webserver\Repositories;
+namespace Hyn\Webserver\Repositories;
 
-use HynMe\Framework\Repositories\BaseRepository;
-use HynMe\Webserver\Contracts\SslRepositoryContract;
+use Hyn\Framework\Repositories\BaseRepository;
+use Hyn\Webserver\Contracts\SslRepositoryContract;
 use Laraflock\MultiTenant\Models\Hostname;
 
 class SslRepository extends BaseRepository implements SslRepositoryContract
@@ -11,7 +11,7 @@ class SslRepository extends BaseRepository implements SslRepositoryContract
     /**
      * @param Hostname $hostname
      *
-     * @return \HynMe\Webserver\Models\SslCertificate
+     * @return \Hyn\Webserver\Models\SslCertificate
      */
     public function findByHostname(Hostname $hostname)
     {

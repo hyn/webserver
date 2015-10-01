@@ -1,10 +1,10 @@
 <?php
 
-namespace HynMe\Webserver\Generators\Webserver;
+namespace Hyn\Webserver\Generators\Webserver;
 
 use File;
-use HynMe\Webserver\Abstracts\AbstractGenerator;
-use HynMe\Webserver\Models\SslCertificate;
+use Hyn\Webserver\Abstracts\AbstractGenerator;
+use Hyn\Webserver\Models\SslCertificate;
 
 class Ssl extends AbstractGenerator
 {

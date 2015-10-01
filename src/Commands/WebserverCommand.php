@@ -1,13 +1,13 @@
 <?php
 
-namespace HynMe\Webserver\Commands;
+namespace Hyn\Webserver\Commands;
 
-use HynMe\Webserver\Generators\Database\Database;
-use HynMe\Webserver\Generators\Unix\WebsiteUser;
-use HynMe\Webserver\Generators\Webserver\Apache;
-use HynMe\Webserver\Generators\Webserver\Fpm;
-use HynMe\Webserver\Generators\Webserver\Nginx;
-use HynMe\Webserver\Generators\Webserver\Ssl;
+use Hyn\Webserver\Generators\Database\Database;
+use Hyn\Webserver\Generators\Unix\WebsiteUser;
+use Hyn\Webserver\Generators\Webserver\Apache;
+use Hyn\Webserver\Generators\Webserver\Fpm;
+use Hyn\Webserver\Generators\Webserver\Nginx;
+use Hyn\Webserver\Generators\Webserver\Ssl;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;

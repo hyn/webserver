@@ -1,6 +1,6 @@
 <?php
 
-namespace HynMe\Webserver\Presenters;
+namespace Hyn\Webserver\Presenters;
 
 use Laraflock\MultiTenant\Presenters\HostnamePresenter;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace HynMe\Webserver\Validators;
+namespace Hyn\Webserver\Validators;
 
-use HynMe\Framework\Validators\AbstractValidator;
+use Hyn\Framework\Validators\AbstractValidator;
 
 class SslValidator extends AbstractValidator
 {

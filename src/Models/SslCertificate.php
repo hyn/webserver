@@ -1,9 +1,9 @@
 <?php
 
-namespace HynMe\Webserver\Models;
+namespace Hyn\Webserver\Models;
 
 use Config;
-use HynMe\Webserver\Tools\CertificateParser;
+use Hyn\Webserver\Tools\CertificateParser;
 use Laracasts\Presenter\PresentableTrait;
 use Laraflock\MultiTenant\Abstracts\Models\SystemModel;
 
@@ -11,7 +11,7 @@ class SslCertificate extends SystemModel
 {
     use PresentableTrait;
 
-    protected $presenter = 'HynMe\Webserver\Presenters\SslCertificatePresenter';
+    protected $presenter = 'Hyn\Webserver\Presenters\SslCertificatePresenter';
 
     protected $fillable = ['tenant_id', 'certificate', 'authority_bundle'];
 

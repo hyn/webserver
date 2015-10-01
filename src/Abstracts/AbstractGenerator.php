@@ -1,6 +1,6 @@
 <?php
 
-namespace HynMe\Webserver\Abstracts;
+namespace Hyn\Webserver\Abstracts;
 
 /**
  * Class AbstractGenerator.
