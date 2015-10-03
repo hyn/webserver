@@ -36,6 +36,9 @@ class ToolboxCommand extends Command {
             foreach($websites as $website) {
                 if($this->option('update-configs')) {
                     $this->dispatch(new WebserverCommand($website->id, 'update'));
+                } else {
+                    $this->error('Unknown option, please specify one.');
+                    return;
                 }
             }
         });
