@@ -26,7 +26,7 @@
 
     @if ($website->websiteUser)
     # user
-        RUidGid {{ $website->websiteUser }} {{ config('webserver.group', 'users') }}
+        {{--RUidGid {{ $website->websiteUser }} {{ config('webserver.group', 'users') }}--}}
     @endif
 
     @if($website->directory->media())
@@ -71,7 +71,7 @@
 
     @if ($website->websiteUser)
         # user
-        RUidGid {{ $website->websiteUser }} {{ config('webserver.group', 'users') }}
+{{--        RUidGid {{ $website->websiteUser }} {{ config('webserver.group', 'users') }}--}}
     @endif
 
     @if($website->directory->media)
