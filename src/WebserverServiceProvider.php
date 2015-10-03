@@ -7,6 +7,7 @@ use Hyn\Webserver\Models\SslHostname;
 use Hyn\Webserver\Repositories\SslRepository;
 use Illuminate\Support\ServiceProvider;
 use Laraflock\MultiTenant\Models\Website;
+use Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract;
 
 class WebserverServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,15 @@ class WebserverServiceProvider extends ServiceProvider
         $this->app->bind('Hyn\Webserver\Contracts\SslRepositoryContract', function ($app) {
             return new SslRepository(new SslCertificate(), new SslHostname());
         });
+
+        /*
+         * Toolbox command
+         */
+        $this->app->bind('hyn.webserver.command.toolbox', function($app) {
+            return new Commands\ToolboxCommand($app->make(WebsiteRepositoryContract::class));
+        });
+
+        $this->commands(['hyn.webserver.command.toolbox']);
     }
 
     /**
@@ -54,6 +64,9 @@ class WebserverServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return [
+            'hyn.webserver.command.toolbox',
+            'Hyn\Webserver\Contracts\SslRepositoryContract',
+        ];
     }
 }
