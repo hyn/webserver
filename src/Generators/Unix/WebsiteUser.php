@@ -27,7 +27,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onCreate()
     {
-        if ($this->name()) {
+        if (! $this->exists() && $this->name()) {
             return exec(sprintf('adduser %s --home %s --ingroup %s --no-create-home --disabled-password --disabled-login --gecos ""',
                 $this->name(),
                 base_path(),
@@ -40,7 +40,9 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onUpdate()
     {
-        if ($this->name() && $this->website->isDirty('identifier')) {
+        if (!$this->exists()) {
+            return $this->onCreate();
+        } elseif ($this->name() && $this->website->isDirty('identifier')) {
             return $this->onRename($this->website->getOriginal('identifier'), $this->website->name());
         }
     }
@@ -52,7 +54,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onDelete()
     {
-        if ($this->name()) {
+        if ($this->exists() && $this->name()) {
             return exec(sprintf('deluser %s', $this->name()));
         }
     }
