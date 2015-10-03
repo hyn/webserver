@@ -2,9 +2,9 @@
 
 <VirtualHost *:{{ $config->port->http or 80 }}>
     @if(isset($hostname))
-        ServerAdmin {{ "webmaster@" . $hostname->hostname }}
+        ServerAdmin {{ "webmaster\@" . $hostname->hostname }}
     @else
-        ServerAdmin {{ "webmaster@" .  $hostnames->first()->hostname }}
+        ServerAdmin {{ "webmaster\@" .  $hostnames->first()->hostname }}
     @endif
 
     @if(isset($hostname))
@@ -47,9 +47,9 @@
 <VirtualHost *:{{ $config->port->https or 443 }}>
 
     @if(isset($hostname))
-        ServerAdmin webmaster@{{ $hostname->hostname }}
+        ServerAdmin webmaster\@{{ $hostname->hostname }}
     @else
-        ServerAdmin webmaster@{{ $hostnames->first()->hostname }}
+        ServerAdmin webmaster\@{{ $hostnames->first()->hostname }}
     @endif
 
     @if(isset($hostname))
