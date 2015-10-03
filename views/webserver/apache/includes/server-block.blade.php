@@ -74,9 +74,9 @@
 {{--        RUidGid {{ $website->websiteUser }} {{ config('webserver.group', 'users') }}--}}
     @endif
 
-    @if($website->directory->media)
+    @if($website->directory->media())
         # media directory
-        alias "/media/" "{{ $website->directory->media }}"
+        alias "/media/" "{{ $website->directory->media() }}"
     @endif
 
     # allow cross domain loading of resources
