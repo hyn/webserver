@@ -11,6 +11,8 @@ class ToolboxCommand extends Command {
     protected $signature = 'webserver:toolbox
         {--update-configs : Update webserver configuration files}';
 
+    protected $description = 'Allows mutation of webserver related to tenancy.';
+
     /**
      * @var WebsiteRepositoryContract
      */
