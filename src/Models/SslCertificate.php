@@ -2,7 +2,7 @@
 
 namespace Hyn\Webserver\Models;
 
-use Config;
+use Config, Cache;
 use Hyn\Webserver\Tools\CertificateParser;
 use Laracasts\Presenter\PresentableTrait;
 use Laraflock\MultiTenant\Abstracts\Models\SystemModel;
@@ -45,7 +45,11 @@ class SslCertificate extends SystemModel
      */
     public function getX509Attribute()
     {
-        return $this->certificate ? new CertificateParser($this->certificate) : null;
+        if(!Cache::has('ssl-x509-' . $this->id)) {
+            Cache::add('ssl-x509-'. $this->id, $this->certificate ? new CertificateParser($this->certificate) : null, 3600);
+        }
+
+        return Cache::get('ssl-x509-'. $this->id);
     }
 
     /**

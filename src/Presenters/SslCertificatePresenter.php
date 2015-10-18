@@ -39,7 +39,7 @@ class SslCertificatePresenter extends AbstractModelPresenter
      */
     public function name()
     {
-        return;
+        return sprintf("%s %s", $this->X509->issuer(), $this->X509->type());
     }
 
     public function expiry()

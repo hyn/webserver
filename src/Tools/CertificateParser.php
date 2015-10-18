@@ -8,11 +8,12 @@ use phpseclib\File\X509;
 class CertificateParser
 {
     /**
-     * @var File_X509
+     * @var X509
      */
     protected $x509;
+
     /**
-     * @var
+     * @var Mixed
      */
     protected $x509result;
 
@@ -116,5 +117,27 @@ class CertificateParser
         }
 
         return false;
+    }
+
+    /**
+     * Returns the issuer organization name.
+     *
+     * @return string
+     */
+    public function issuer()
+    {
+        $issuer = $this->x509->getIssuerDNProp('id-at-organizationName');
+        return head($issuer);
+    }
+
+    /**
+     * Tries to find the best match of the current certificate.
+     *
+     * @return string
+     */
+    public function type()
+    {
+        $types = $this->x509->getSubjectDNProp('id-at-organizationalUnitName');
+        return last($types);
     }
 }
