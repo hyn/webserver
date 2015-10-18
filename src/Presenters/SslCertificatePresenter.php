@@ -31,7 +31,7 @@ class SslCertificatePresenter extends AbstractModelPresenter
      */
     public function icon()
     {
-        return 'lock';
+        return 'fa fa-lock';
     }
 
     /**
