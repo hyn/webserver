@@ -3,7 +3,7 @@
 namespace Hyn\Webserver\Tools;
 
 use Carbon\Carbon;
-use File_X509;
+use phpseclib\File\X509;
 
 class CertificateParser
 {
@@ -18,7 +18,7 @@ class CertificateParser
 
     public function __construct($certificate)
     {
-        $x509 = new File_X509();
+        $x509 = new X509();
         $x509result = $x509->loadX509($certificate);
 
         $this->x509 = $x509;
