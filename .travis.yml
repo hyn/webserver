@@ -1,5 +1,8 @@
 language: php
 
+addons:
+  postgresql: "9.4"
+
 sudo: true
 
 php:
@@ -7,6 +10,27 @@ php:
   - 5.6
   - 7.0
   - hhvm
+
+
+install:
+  # fix ipv6 issue that prevented composer requests and resulted in failing builds
+  - sudo sh -c "echo 'precedence ::ffff:0:0/96  100' >> /etc/gai.conf"
+  # updates composer on travis
+  - travis_retry composer self-update
+  # clear composer cache, might speed up finding new tags
+  - travis_retry composer clear-cache
+  # set the global github token, so connections won't be cancelled
+  - composer config -g github-oauth.github.com $GITHUB_TOKEN
+  # create a new database for the hyn connection
+  - mysql -e "create database hyn;" -uroot
+  - mysql -e "grant all privileges on *.* to 'travis'@'localhost' with grant option;" -uroot
+  - psql -c 'create user travis with password "secret";' -U postgres
+  - psql -c 'create database hyn;' -U postgres
+  - psql -c 'grant all privileges on *.* to travis with grant option;" -U postgres
+  # install dependancies
+  - travis_retry composer install --prefer-source --no-interaction --dev
+  # set global variables
+  - export DB_USERNAME=travis DB_DATABASE=hyn DB_PASSWORD= QUEUE_DRIVER=sync
 
 before_script:
   - travis_retry composer self-update
