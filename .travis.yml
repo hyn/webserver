@@ -1,6 +1,9 @@
 language: php
 
 addons:
+  apt:
+    packages:
+      - php5-pgsql
   postgresql: "9.4"
 
 sudo: true
@@ -29,8 +32,6 @@ install:
   - travis_retry composer install --prefer-source --no-interaction --dev
   # set global variables
   - export DB_USERNAME=travis DB_DATABASE=hyn DB_PASSWORD= QUEUE_DRIVER=sync
-  # install pdo pgsql
-  - sudo apt-get -y -f install php5-pgsql
 
 script:
   - phpunit
