@@ -2,6 +2,7 @@
 
 namespace Hyn\Webserver\Tests;
 
+use Hyn\Framework\FrameworkServiceProvider;
 use Hyn\Webserver\Commands\WebserverCommand;
 use Illuminate\Database\Eloquent\Factory;
 use Laraflock\MultiTenant\Models\Website;
@@ -40,6 +41,8 @@ class WebsiteUserTest extends TestCase
         $app->singleton(Factory::class, function () {
             return Factory::construct(new Generator(), __DIR__.'/../database/factories');
         });
+
+        $provider = $app->register(FrameworkServiceProvider::class);
 
         $db_preset = $app['config']->get('database.connections.mysql');
 
