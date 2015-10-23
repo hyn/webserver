@@ -11,7 +11,6 @@ php:
   - 7.0
   - hhvm
 
-
 install:
   # fix ipv6 issue that prevented composer requests and resulted in failing builds
   - sudo sh -c "echo 'precedence ::ffff:0:0/96  100' >> /etc/gai.conf"
@@ -31,14 +30,8 @@ install:
   # set global variables
   - export DB_USERNAME=travis DB_DATABASE=hyn DB_PASSWORD= QUEUE_DRIVER=sync
 
-before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --prefer-source --no-interaction --dev
-  - export DB_USERNAME=travis DB_DATABASE=hyn DB_PASSWORD= QUEUE_DRIVER=sync
-
 script:
   - phpunit
-
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
