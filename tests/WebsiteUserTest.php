@@ -40,15 +40,11 @@ class WebsiteUserTest extends TestCase
             return Factory::construct(new Generator(), __DIR__.'/../database/factories');
         });
 
-        $app['config']->set('database.connections.tenant', [
-            'driver' => 'pgsql',
-            'database' => 'tenant-pgsql'
-        ]);
+        $db_preset = $app['config']->get('database.connections.mysql');
 
-        $app['config']->set('database.connections.hyn', [
-            'driver' => 'pgsql',
+        $app['config']->set('database.connections.hyn', array_merge($db_preset, [
             'database' => 'hyn'
-        ]);
+        ]));
 
         $app['config']->set('database.default', 'hyn');
 
