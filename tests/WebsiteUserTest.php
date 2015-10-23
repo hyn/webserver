@@ -36,6 +36,7 @@ class WebsiteUserTest extends TestCase
 
         $app->make(Kernel::class)->bootstrap();
 
+        // register factory for mocking
         $app->singleton(Factory::class, function () {
             return Factory::construct(new Generator(), __DIR__.'/../database/factories');
         });
@@ -47,6 +48,13 @@ class WebsiteUserTest extends TestCase
         ]));
 
         $app['config']->set('database.default', 'hyn');
+
+        $this->artisan('multi-tenant:setup', [
+            '--tenant'    => 'example',
+            '--hostname'  => 'system.testing',    // configured in travis as primary hostname
+            '--email'     => 'info@example.org',
+            '--webserver' => 'apache',
+        ]);
 
         return $app;
     }
