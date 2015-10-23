@@ -24,9 +24,9 @@ install:
   # create a new database for the hyn connection
   - mysql -e "create database hyn;" -uroot
   - mysql -e "grant all privileges on *.* to 'travis'@'localhost' with grant option;" -uroot
-  - psql -c 'create user travis with password "secret";' -U postgres
+  - psql -c "create user travis with password 'secret';" -U postgres
   - psql -c 'create database hyn;' -U postgres
-  - psql -c 'grant all privileges on *.* to travis with grant option;" -U postgres
+  - psql -c 'grant all privileges on *.* to travis with grant option;' -U postgres
   # install dependancies
   - travis_retry composer install --prefer-source --no-interaction --dev
   # set global variables
