@@ -25,7 +25,7 @@ install:
   - mysql -e "create database hyn;" -uroot
   - mysql -e "grant all privileges on *.* to 'travis'@'localhost' with grant option;" -uroot
   - psql -c 'create database hyn;' -U postgres
-  - psql -c 'grant all privileges on *.* to travis with grant option;' -U postgres
+  - psql -c 'alter default privileges in schema public grant all on tables to travis;' -U postgres
   # install dependancies
   - travis_retry composer install --prefer-source --no-interaction --dev
   # set global variables
