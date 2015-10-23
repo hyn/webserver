@@ -41,19 +41,16 @@ class WebsiteUserTest extends TestCase
         });
 
         $app['config']->set('database.connections.tenant', [
-            'driver' => 'psql',
-            'database' => database_path('tenant.psql')
+            'driver' => 'pgsql',
+            'database' => 'tenant-pgsql'
         ]);
 
         $app['config']->set('database.connections.hyn', [
-            'driver' => 'psql',
-            'database' => database_path('system.psql')
+            'driver' => 'pgsql',
+            'database' => 'hyn'
         ]);
 
         $app['config']->set('database.default', 'hyn');
-
-        touch(database_path('tenant.psql'));
-        touch(database_path('system.psql'));
 
         return $app;
     }
