@@ -30,7 +30,7 @@ install:
   # set global variables
   - export DB_USERNAME=travis DB_DATABASE=hyn DB_PASSWORD= QUEUE_DRIVER=sync
   # install pdo pgsql
-  - sudo apt-get install php5-pgsql
+  - sudo apt-get -y -f install php5-pgsql
 
 script:
   - phpunit
