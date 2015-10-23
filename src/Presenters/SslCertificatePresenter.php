@@ -7,6 +7,18 @@ use Hyn\Framework\Presenters\AbstractModelPresenter;
 class SslCertificatePresenter extends AbstractModelPresenter
 {
     /**
+     * SSL Certificate does not really have a name.
+     *
+     * @return array
+     */
+    public function urlArguments()
+    {
+        return [
+            'id' => $this->id
+        ];
+    }
+
+    /**
      * Shows summary of hostnames.
      *
      * @return string
