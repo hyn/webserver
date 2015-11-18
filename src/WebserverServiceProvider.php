@@ -6,8 +6,8 @@ use Hyn\Webserver\Models\SslCertificate;
 use Hyn\Webserver\Models\SslHostname;
 use Hyn\Webserver\Repositories\SslRepository;
 use Illuminate\Support\ServiceProvider;
-use Laraflock\MultiTenant\Models\Website;
-use Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract;
+use Hyn\MultiTenant\Models\Website;
+use Hyn\MultiTenant\Contracts\WebsiteRepositoryContract;
 
 class WebserverServiceProvider extends ServiceProvider
 {

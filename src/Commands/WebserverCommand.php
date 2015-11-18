@@ -35,7 +35,7 @@ class WebserverCommand extends Command implements SelfHandling, ShouldQueue
      */
     public function __construct($website_id, $action = 'update')
     {
-        $this->website = app('Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
+        $this->website = app('Hyn\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
         $this->action = $action;
     }
 

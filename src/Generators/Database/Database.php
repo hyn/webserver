@@ -3,7 +3,7 @@
 namespace Hyn\Webserver\Generators\Database;
 
 use Hyn\Webserver\Abstracts\AbstractGenerator;
-use Laraflock\MultiTenant\Models\Website;
+use Hyn\MultiTenant\Models\Website;
 
 class Database extends AbstractGenerator
 {
