@@ -42,7 +42,7 @@ class WebsiteUserTest extends TestCase
             return Factory::construct(new Generator(), __DIR__.'/../database/factories');
         });
 
-        $provider = $app->register(FrameworkServiceProvider::class);
+        $app->register(FrameworkServiceProvider::class);
 
         $db_preset = $app['config']->get('database.connections.mysql');
 
