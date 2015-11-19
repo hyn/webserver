@@ -5,11 +5,11 @@ namespace Hyn\Webserver\Tests;
 use Hyn\Framework\FrameworkServiceProvider;
 use Hyn\Webserver\Commands\WebserverCommand;
 use Illuminate\Database\Eloquent\Factory;
-use Laraflock\MultiTenant\Models\Website;
+use Hyn\MultiTenant\Models\Website;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Contracts\Console\Kernel;
 use Faker\Generator;
-use Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract;
+use Hyn\MultiTenant\Contracts\WebsiteRepositoryContract;
 use Mockery;
 
 class WebsiteUserTest extends TestCase

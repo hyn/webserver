@@ -4,7 +4,7 @@ namespace Hyn\Webserver\Generators;
 
 use File;
 use Hyn\Webserver\Abstracts\AbstractGenerator;
-use Laraflock\MultiTenant\Models\Website;
+use Hyn\MultiTenant\Models\Website;
 use ReflectionClass;
 
 abstract class AbstractFileGenerator extends AbstractGenerator

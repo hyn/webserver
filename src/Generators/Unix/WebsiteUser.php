@@ -3,7 +3,7 @@
 namespace Hyn\Webserver\Generators\Unix;
 
 use Hyn\Webserver\Generators\AbstractUserGenerator;
-use Laraflock\MultiTenant\Models\Website;
+use Hyn\MultiTenant\Models\Website;
 
 class WebsiteUser extends AbstractUserGenerator
 {
