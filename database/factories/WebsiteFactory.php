@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(Laraflock\MultiTenant\Models\Website::class, function (Faker\Generator $faker) {
+$factory->define(Hyn\MultiTenant\Models\Website::class, function (Faker\Generator $faker) {
     $faker->addProvider(Faker\Provider\Base::class);
 
     return [

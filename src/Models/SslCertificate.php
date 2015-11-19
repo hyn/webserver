@@ -5,8 +5,8 @@ namespace Hyn\Webserver\Models;
 use Config, Cache;
 use Hyn\Webserver\Tools\CertificateParser;
 use Laracasts\Presenter\PresentableTrait;
-use Laraflock\MultiTenant\Abstracts\Models\SystemModel;
-use Laraflock\MultiTenant\Models\Tenant;
+use Hyn\MultiTenant\Abstracts\Models\SystemModel;
+use Hyn\MultiTenant\Models\Tenant;
 
 /**
  * Class SslCertificate

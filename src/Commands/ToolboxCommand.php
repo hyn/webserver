@@ -2,7 +2,7 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Laraflock\MultiTenant\Contracts\WebsiteRepositoryContract;
+use Hyn\MultiTenant\Contracts\WebsiteRepositoryContract;
 
 class ToolboxCommand extends Command {
 

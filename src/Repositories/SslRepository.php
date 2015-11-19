@@ -4,7 +4,7 @@ namespace Hyn\Webserver\Repositories;
 
 use Hyn\Framework\Repositories\BaseRepository;
 use Hyn\Webserver\Contracts\SslRepositoryContract;
-use Laraflock\MultiTenant\Models\Hostname;
+use Hyn\MultiTenant\Models\Hostname;
 
 class SslRepository extends BaseRepository implements SslRepositoryContract
 {
