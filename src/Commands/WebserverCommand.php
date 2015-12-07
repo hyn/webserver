@@ -38,7 +38,7 @@ class WebserverCommand extends Command implements SelfHandling, ShouldQueue
     {
         $this->website = app('Hyn\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
         $this->action  = $action;
-        
+
         // set the queue if specified in the configuration file
         if (is_null($this->queue) && config('multi-tenant.queue')) {
             $this->onQueue(config('multi-tenant.queue'));
