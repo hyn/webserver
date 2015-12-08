@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Hyn\MultiTenant\Tenant\DatabaseConnection;
 
-class HwsSslHostnamesTableDropHostnameId extends Migration
+class HwsSslHostnamesDropHostnameId extends Migration
 {
     /**
      * Run the migrations.
