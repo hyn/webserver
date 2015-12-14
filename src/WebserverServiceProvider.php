@@ -2,6 +2,7 @@
 
 namespace Hyn\Webserver;
 
+use Hyn\MultiTenant\Models\Hostname;
 use Hyn\Webserver\Models\SslCertificate;
 use Hyn\Webserver\Models\SslHostname;
 use Hyn\Webserver\Repositories\SslRepository;
@@ -30,6 +31,7 @@ class WebserverServiceProvider extends ServiceProvider
 
         Website::observe(new Observers\WebsiteObserver());
         SslCertificate::observe(new Observers\SslCertificateObserver());
+        Hostname::observe(new Observers\HostnameObserver());
 
         /*
          * Ssl repository
