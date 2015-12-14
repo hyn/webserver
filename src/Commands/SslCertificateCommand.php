@@ -2,7 +2,6 @@
 
 namespace Hyn\Webserver\Commands;
 
-use App;
 use Hyn\Webserver\Generators\Webserver\Ssl;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -32,7 +31,7 @@ class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQue
      */
     public function __construct($certificate_id, $action = 'update')
     {
-        $this->certificate = App::make('Hyn\Webserver\Contracts\SslRepositoryContract')->findById($certificate_id);
+        $this->certificate = app('Hyn\Webserver\Contracts\SslRepositoryContract')->findById($certificate_id);
         $this->action = $action;
     }
 

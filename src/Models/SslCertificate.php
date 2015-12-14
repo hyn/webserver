@@ -40,6 +40,11 @@ class SslCertificate extends SystemModel
         return ['validates_at', 'invalidates_at'];
     }
 
+    public function getIsExpired()
+    {
+        return $this->invalidates_at ? $this->invalidates_at->isPast() : null;
+    }
+
     /**
      * @return CertificateParser|null
      */
