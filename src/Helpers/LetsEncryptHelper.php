@@ -27,7 +27,8 @@ class LetsEncryptHelper
 
         $this->contact = config('webserver.ssl.lets-encrypt-contact');
 
-        $this->directory = sprintf('%s/%s', config('webserver.ssl.lets-encrypt-storage-path'), array_get($this->contact, 'username'));
+        $this->directory = sprintf('%s/%s', config('webserver.ssl.lets-encrypt-storage-path'),
+            array_get($this->contact, 'username'));
     }
 
     /**
@@ -49,16 +50,17 @@ class LetsEncryptHelper
 
     /**
      * Generates the Let's Encrypt certificate.
+     *
      * @return bool|mixed
      */
     public function generate()
     {
-        if(!$this->checkInstallation())
-        {
+        if (!$this->checkInstallation()) {
             return false;
         }
 
-        $account = new Account(array_get($this->contact, 'username'), array_get($this->contact, 'email-address'), new DiskStorage($this->directory));
+        $account     = new Account(array_get($this->contact, 'username'), array_get($this->contact, 'email-address'),
+            new DiskStorage($this->directory));
         $certificate = (new Certificate($account))->addHostname($this->hostname->hostname);
 
         return $certificate->request();
