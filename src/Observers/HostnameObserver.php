@@ -1,4 +1,6 @@
-<?php namespace Hyn\Webserver\Observers;
+<?php
+
+namespace Hyn\Webserver\Observers;
 
 use Hyn\Webserver\Commands\LetsEncryptCommand;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -12,7 +14,7 @@ class HostnameObserver
      */
     public function saved($model)
     {
-        if (!$model->certificate || $model->certificate->isExpired === true) {
+        if (! $model->certificate || $model->certificate->isExpired === true) {
             $this->dispatch(
                 new LetsEncryptCommand($model->id)
             );

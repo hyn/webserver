@@ -37,7 +37,7 @@ class WebserverCommand extends Command implements SelfHandling, ShouldQueue
     public function __construct($website_id, $action = 'update')
     {
         $this->website = app('Hyn\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
-        $this->action  = $action;
+        $this->action = $action;
 
         // set the queue if specified in the configuration file
         if (is_null($this->queue) && config('multi-tenant.queue')) {
@@ -52,7 +52,7 @@ class WebserverCommand extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        if (!in_array($this->action, ['create', 'update', 'delete'])) {
+        if (! in_array($this->action, ['create', 'update', 'delete'])) {
             return;
         }
 

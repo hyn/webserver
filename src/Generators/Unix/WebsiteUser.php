@@ -40,7 +40,7 @@ class WebsiteUser extends AbstractUserGenerator
      */
     public function onUpdate()
     {
-        if (!$this->exists()) {
+        if (! $this->exists()) {
             return $this->onCreate();
         } elseif ($this->name() && $this->website->isDirty('identifier')) {
             return $this->onRename($this->website->getOriginal('identifier'), $this->website->name());

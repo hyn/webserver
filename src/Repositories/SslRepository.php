@@ -16,7 +16,7 @@ class SslRepository extends BaseRepository implements SslRepositoryContract
     public function findByHostname(Hostname $hostname)
     {
         return $this->model->with('hostnames')->where(function ($q) use ($hostname) {
-            
+
         });
     }
 }

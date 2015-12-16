@@ -1,4 +1,6 @@
-<?php namespace Hyn\Webserver\Helpers;
+<?php
+
+namespace Hyn\Webserver\Helpers;
 
 use File;
 use Hyn\LetsEncrypt\Resources\Account;
@@ -9,7 +11,6 @@ use Hyn\MultiTenant\Models\Tenant;
 
 class LetsEncryptHelper
 {
-
     /**
      * @var Hostname
      */
@@ -19,7 +20,6 @@ class LetsEncryptHelper
      * @var Tenant
      */
     protected $contact;
-
 
     public function __construct(Hostname $hostname)
     {
@@ -39,7 +39,7 @@ class LetsEncryptHelper
     protected function checkInstallation()
     {
         if (config('webserver.ssl.lets-encrypt') && class_exists(Certificate::class) &&
-            !empty($this->contact['username']) && !empty($this->contact['email-address']) &&
+            ! empty($this->contact['username']) && ! empty($this->contact['email-address']) &&
             (File::isDirectory($this->directory) || File::makeDirectory($this->directory, 0755, true))
         ) {
             return true;
@@ -55,11 +55,11 @@ class LetsEncryptHelper
      */
     public function generate()
     {
-        if (!$this->checkInstallation()) {
+        if (! $this->checkInstallation()) {
             return false;
         }
 
-        $account     = new Account(array_get($this->contact, 'username'), array_get($this->contact, 'email-address'),
+        $account = new Account(array_get($this->contact, 'username'), array_get($this->contact, 'email-address'),
             new DiskStorage($this->directory));
         $certificate = (new Certificate($account))->addHostname($this->hostname->hostname);
 

@@ -2,16 +2,15 @@
 
 namespace Hyn\Webserver\Models;
 
-use Config, Cache;
+use Config;
+use Cache;
 use Hyn\Webserver\Tools\CertificateParser;
 use Laracasts\Presenter\PresentableTrait;
 use Hyn\MultiTenant\Abstracts\Models\SystemModel;
 use Hyn\MultiTenant\Models\Tenant;
 
 /**
- * Class SslCertificate
- *
- * @package Hyn\Webserver\Models
+ * Class SslCertificate.
  */
 class SslCertificate extends SystemModel
 {
@@ -30,7 +29,7 @@ class SslCertificate extends SystemModel
     /**
      * @var array
      */
-    protected $appends = ['pathKey', 'pathPem' ,'pathCrt', 'pathCa'];
+    protected $appends = ['pathKey', 'pathPem', 'pathCrt', 'pathCa'];
 
     /**
      * @return array
@@ -50,11 +49,11 @@ class SslCertificate extends SystemModel
      */
     public function getX509Attribute()
     {
-        if(!Cache::has('ssl-x509-' . $this->id)) {
-            Cache::add('ssl-x509-'. $this->id, $this->certificate ? new CertificateParser($this->certificate) : null, 3600);
+        if (! Cache::has('ssl-x509-'.$this->id)) {
+            Cache::add('ssl-x509-'.$this->id, $this->certificate ? new CertificateParser($this->certificate) : null, 3600);
         }
 
-        return Cache::get('ssl-x509-'. $this->id);
+        return Cache::get('ssl-x509-'.$this->id);
     }
 
     /**

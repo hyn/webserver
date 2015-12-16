@@ -43,7 +43,7 @@ class WebserverServiceProvider extends ServiceProvider
         /*
          * Toolbox command
          */
-        $this->app->bind('hyn.webserver.command.toolbox', function($app) {
+        $this->app->bind('hyn.webserver.command.toolbox', function ($app) {
             return new Commands\ToolboxCommand($app->make(WebsiteRepositoryContract::class));
         });
 

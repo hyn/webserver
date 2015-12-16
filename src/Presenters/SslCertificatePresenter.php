@@ -14,7 +14,7 @@ class SslCertificatePresenter extends AbstractModelPresenter
     public function urlArguments()
     {
         return [
-            'id' => $this->id
+            'id' => $this->id,
         ];
     }
 
@@ -51,7 +51,7 @@ class SslCertificatePresenter extends AbstractModelPresenter
      */
     public function name()
     {
-        return sprintf("%s %s", $this->X509->issuer(), $this->X509->type());
+        return sprintf('%s %s', $this->X509->issuer(), $this->X509->type());
     }
 
     public function expiry()
