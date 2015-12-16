@@ -47,7 +47,7 @@ class WebsiteUserTest extends TestCase
         $db_preset = $app['config']->get('database.connections.mysql');
 
         $app['config']->set('database.connections.hyn', array_merge($db_preset, [
-            'database' => 'hyn'
+            'database' => 'hyn',
         ]));
 
         $app['config']->set('database.default', 'hyn');

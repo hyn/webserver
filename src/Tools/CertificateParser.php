@@ -13,7 +13,7 @@ class CertificateParser
     protected $x509;
 
     /**
-     * @var Mixed
+     * @var mixed
      */
     protected $x509result;
 
@@ -127,6 +127,7 @@ class CertificateParser
     public function issuer()
     {
         $issuer = $this->x509->getIssuerDNProp('id-at-organizationName');
+
         return head($issuer);
     }
 
@@ -138,6 +139,7 @@ class CertificateParser
     public function type()
     {
         $types = $this->x509->getSubjectDNProp('id-at-organizationalUnitName');
+
         return last($types);
     }
 }

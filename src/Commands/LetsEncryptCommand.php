@@ -1,4 +1,6 @@
-<?php namespace Hyn\Webserver\Commands;
+<?php
+
+namespace Hyn\Webserver\Commands;
 
 use App;
 use Illuminate\Console\Command;
