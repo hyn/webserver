@@ -17,7 +17,7 @@ return [
      *      - <string> will use the specified existing username for the website
      *      - null will disable generating users
      */
-    'default-user' => null,
+    'default-user' => true,
 
     /*
      * The group the tenant files should belong to
