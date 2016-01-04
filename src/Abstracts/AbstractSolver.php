@@ -37,8 +37,13 @@ abstract class AbstractSolver implements ChallengeSolverContract
     final public function solve(Challenge $challenge, $payload = [])
     {
         $this->request = new Request([
-            'solver' => __CLASS__
+            'solver' => __CLASS__,
+            'expires_at' => $challenge->getExpires(),
+            'hostname_id' => $challenge->getCertificate()->getIdentifier(),
         ]);
+
+        // forward the request to the extended class
+        $this->handle();
     }
 
     abstract protected function handle();

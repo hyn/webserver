@@ -65,7 +65,7 @@ class LetsEncryptHelper
 
         $account = new Account(array_get($this->contact, 'username'), array_get($this->contact, 'email-address'),
             new DiskStorage($this->directory));
-        $certificate = (new Certificate($account))->addHostname($this->hostname->hostname);
+        $certificate = (new Certificate($account, $this->hostname->id))->addHostname($this->hostname->hostname);
 
         return $certificate->request();
     }
