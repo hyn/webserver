@@ -15,7 +15,7 @@ class HwsSslHostnamesTable extends Migration
     {
         Schema::connection(DatabaseConnection::systemConnectionName())->create('ssl_hostnames', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // tenant owner
+            // certificate id
             $table->bigInteger('ssl_certificate_id')->unsigned();
             // domain relation
             $table->bigInteger('hostname_id')->unsigned();
