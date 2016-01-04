@@ -8,7 +8,6 @@ use Hyn\Webserver\Models\LetsEncrypt\Request;
 
 abstract class AbstractSolver implements ChallengeSolverContract
 {
-
     /**
      * @var Challenge
      */
@@ -48,10 +47,8 @@ abstract class AbstractSolver implements ChallengeSolverContract
 
     abstract protected function handle();
 
-    final function __destruct()
+    final public function __destruct()
     {
         $this->request->save();
     }
-
-
 }
