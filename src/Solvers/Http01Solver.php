@@ -2,23 +2,12 @@
 
 namespace Hyn\Webserver\Solvers;
 
-use Hyn\LetsEncrypt\Contracts\ChallengeSolverContract;
-use Hyn\LetsEncrypt\Resources\Challenge;
+use Hyn\Webserver\Abstracts\AbstractSolver;
 
-class Http01Solver implements ChallengeSolverContract {
+class Http01Solver extends AbstractSolver {
 
-    /**
-     * Solves a certain challenge.
-     *
-     * Return false if not possible.
-     *
-     * @param Challenge $challenge
-     * @param array     $payload
-     *
-     * @return bool
-     */
-    public function solve(Challenge $challenge, $payload = [])
+    protected function handle()
     {
-
+        // TODO: Implement handle() method.
     }
 }
