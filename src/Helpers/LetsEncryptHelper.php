@@ -4,6 +4,7 @@ namespace Hyn\Webserver\Helpers;
 
 use File;
 use Hyn\LetsEncrypt\Resources\Account;
+use Hyn\LetsEncrypt\Resources\Challenge;
 use Hyn\LetsEncrypt\Storages\Configuration\DiskStorage;
 use Hyn\MultiTenant\Models\Hostname;
 use Hyn\LetsEncrypt\Resources\Certificate;
@@ -29,6 +30,9 @@ class LetsEncryptHelper
 
         $this->directory = sprintf('%s/%s', config('webserver.ssl.lets-encrypt-storage-path'),
             array_get($this->contact, 'username'));
+
+        // inject our custom namespace for Challenge solving.
+        Challenge::setSolverLocations(['Hyn\Webserver\Solvers']);
     }
 
     /**
