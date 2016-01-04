@@ -2,16 +2,13 @@
 
 namespace Hyn\Webserver\Commands;
 
+use Hyn\Framework\Commands\AbstractRootCommand;
 use Hyn\Webserver\Generators\Webserver\Ssl;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
-use Illuminate\Queue\InteractsWithQueue;
 
-class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQueued
+class SslCertificateCommand extends AbstractRootCommand implements SelfHandling, ShouldBeQueued
 {
-    use
-        InteractsWithQueue;
 
     /**
      * @var Certificate
@@ -26,11 +23,13 @@ class SslCertificateCommand extends Command implements SelfHandling, ShouldBeQue
     /**
      * Create a new command instance.
      *
-     * @param int    $website_id
+     * @param        $certificate_id
      * @param string $action
      */
     public function __construct($certificate_id, $action = 'update')
     {
+        parent::__construct();
+
         $this->certificate = app('Hyn\Webserver\Contracts\SslRepositoryContract')->findById($certificate_id);
         $this->action = $action;
     }

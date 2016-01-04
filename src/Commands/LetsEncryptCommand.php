@@ -3,15 +3,12 @@
 namespace Hyn\Webserver\Commands;
 
 use App;
-use Illuminate\Console\Command;
+use Hyn\Framework\Commands\AbstractCommand;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
-use Illuminate\Queue\InteractsWithQueue;
 
-class LetsEncryptCommand extends Command implements SelfHandling, ShouldBeQueued
+class LetsEncryptCommand extends AbstractCommand implements SelfHandling, ShouldBeQueued
 {
-    use
-        InteractsWithQueue;
 
     /**
      * @var Certificate
@@ -30,6 +27,8 @@ class LetsEncryptCommand extends Command implements SelfHandling, ShouldBeQueued
      */
     public function __construct($hostname_id)
     {
+        parent::__construct();
+
         $this->hostname = app('Hyn\Webserver\Contracts\HostnameRepositoryContract')->findById($hostname_id);
     }
 

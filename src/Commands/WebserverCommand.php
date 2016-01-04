@@ -2,22 +2,18 @@
 
 namespace Hyn\Webserver\Commands;
 
+use Hyn\Framework\Commands\AbstractRootCommand;
 use Hyn\Webserver\Generators\Database\Database;
 use Hyn\Webserver\Generators\Unix\WebsiteUser;
 use Hyn\Webserver\Generators\Webserver\Apache;
 use Hyn\Webserver\Generators\Webserver\Fpm;
 use Hyn\Webserver\Generators\Webserver\Nginx;
 use Hyn\Webserver\Generators\Webserver\Ssl;
-use Illuminate\Bus\Queueable;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
-class WebserverCommand extends Command implements SelfHandling, ShouldQueue
+class WebserverCommand extends AbstractRootCommand implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, Queueable;
-
     /**
      * @var Website
      */
@@ -36,13 +32,10 @@ class WebserverCommand extends Command implements SelfHandling, ShouldQueue
      */
     public function __construct($website_id, $action = 'update')
     {
+        parent::__construct();
+
         $this->website = app('Hyn\MultiTenant\Contracts\WebsiteRepositoryContract')->findById($website_id);
         $this->action = $action;
-
-        // set the queue if specified in the configuration file
-        if (is_null($this->queue) && config('multi-tenant.queue')) {
-            $this->onQueue(config('multi-tenant.queue'));
-        }
     }
 
     /**

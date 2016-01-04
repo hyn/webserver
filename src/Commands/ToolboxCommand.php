@@ -2,11 +2,11 @@
 
 namespace Hyn\Webserver\Commands;
 
-use Illuminate\Console\Command;
+use Hyn\Framework\Commands\AbstractCommand;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Hyn\MultiTenant\Contracts\WebsiteRepositoryContract;
 
-class ToolboxCommand extends Command
+class ToolboxCommand extends AbstractCommand
 {
     use DispatchesJobs;
 
@@ -25,9 +25,9 @@ class ToolboxCommand extends Command
      */
     public function __construct(WebsiteRepositoryContract $website)
     {
-        $this->website = $website;
-
         parent::__construct();
+
+        $this->website = $website;
     }
 
     /**
