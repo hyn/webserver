@@ -5,8 +5,8 @@ namespace Hyn\Webserver\Solvers;
 use Hyn\LetsEncrypt\Contracts\ChallengeSolverContract;
 use Hyn\LetsEncrypt\Resources\Challenge;
 
-class Http01Solver implements ChallengeSolverContract {
-
+class Http01Solver implements ChallengeSolverContract
+{
     /**
      * Solves a certain challenge.
      *
@@ -19,6 +19,5 @@ class Http01Solver implements ChallengeSolverContract {
      */
     public function solve(Challenge $challenge, $payload = [])
     {
-
     }
 }
