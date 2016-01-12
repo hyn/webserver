@@ -37,8 +37,8 @@ abstract class AbstractSolver implements ChallengeSolverContract
     final public function solve(Challenge $challenge, $payload = [])
     {
         $this->request = new Request([
-            'solver' => __CLASS__,
-            'expires_at' => $challenge->getExpires(),
+            'solver'      => __CLASS__,
+            'expires_at'  => $challenge->getExpires(),
             'hostname_id' => $challenge->getCertificate()->getIdentifier(),
         ]);
 
@@ -52,7 +52,7 @@ abstract class AbstractSolver implements ChallengeSolverContract
 
     final function __destruct()
     {
-        if($this->request->isDirty()) {
+        if ($this->request->isDirty()) {
             $this->request->save();
         }
     }
