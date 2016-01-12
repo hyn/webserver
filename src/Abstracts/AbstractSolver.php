@@ -42,6 +42,8 @@ abstract class AbstractSolver implements ChallengeSolverContract
             'hostname_id' => $challenge->getCertificate()->getIdentifier(),
         ]);
 
+        $this->request->save();
+
         // forward the request to the extended class
         $this->handle();
     }
@@ -50,7 +52,9 @@ abstract class AbstractSolver implements ChallengeSolverContract
 
     final function __destruct()
     {
-        $this->request->save();
+        if($this->request->isDirty()) {
+            $this->request->save();
+        }
     }
 
 
