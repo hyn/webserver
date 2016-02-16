@@ -25,7 +25,7 @@ class ServerConfigurationHelper
      */
     public function createDirectories()
     {
-        foreach (config('webserver') as $key => $params) {
+        foreach (config('webserver', []) as $key => $params) {
             $path = array_get($params, 'path');
 
             if ($path && ! File::isDirectory($path)) {
