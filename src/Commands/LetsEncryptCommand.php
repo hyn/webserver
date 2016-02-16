@@ -10,7 +10,6 @@ use Illuminate\Contracts\Queue\ShouldBeQueued;
 
 class LetsEncryptCommand extends AbstractCommand implements SelfHandling, ShouldBeQueued
 {
-
     /**
      * @var Certificate
      */
