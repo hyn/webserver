@@ -9,10 +9,8 @@ use Hyn\Webserver\Generators\Webserver\Apache;
 use Hyn\Webserver\Generators\Webserver\Fpm;
 use Hyn\Webserver\Generators\Webserver\Nginx;
 use Hyn\Webserver\Generators\Webserver\Ssl;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class WebserverCommand extends AbstractRootCommand implements SelfHandling, ShouldQueue
+class WebserverCommand extends AbstractRootCommand
 {
     /**
      * @var Website
