@@ -9,7 +9,6 @@ use Illuminate\Contracts\Queue\ShouldBeQueued;
 
 class SslCertificateCommand extends AbstractRootCommand implements SelfHandling, ShouldBeQueued
 {
-
     /**
      * @var Certificate
      */
