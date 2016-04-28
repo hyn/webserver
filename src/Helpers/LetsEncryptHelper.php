@@ -4,11 +4,10 @@ namespace Hyn\Webserver\Helpers;
 
 use File;
 use Hyn\LetsEncrypt\Resources\Account;
+use Hyn\LetsEncrypt\Resources\Certificate;
 use Hyn\LetsEncrypt\Resources\Challenge;
 use Hyn\LetsEncrypt\Storages\Configuration\DiskStorage;
 use Hyn\MultiTenant\Models\Hostname;
-use Hyn\LetsEncrypt\Resources\Certificate;
-use Hyn\MultiTenant\Models\Tenant;
 
 class LetsEncryptHelper
 {
@@ -18,9 +17,18 @@ class LetsEncryptHelper
     protected $hostname;
 
     /**
-     * @var Tenant
+     * Username and e-mail address for this installation.
+     *
+     * @var array
      */
     protected $contact;
+
+    /**
+     * Let's encrypt disk location path.
+     *
+     * @var string
+     */
+    protected $directory;
 
     public function __construct(Hostname $hostname)
     {
@@ -28,28 +36,13 @@ class LetsEncryptHelper
 
         $this->contact = config('webserver.ssl.lets-encrypt-contact');
 
-        $this->directory = sprintf('%s/%s', config('webserver.ssl.lets-encrypt-storage-path'),
-            array_get($this->contact, 'username'));
+        $this->directory = sprintf('%s/%s',
+            config('webserver.ssl.lets-encrypt-storage-path'),
+            array_get($this->contact, 'username')
+        );
 
         // inject our custom namespace for Challenge solving.
         Challenge::setSolverLocations(['Hyn\Webserver\Solvers']);
-    }
-
-    /**
-     * Checks whether the installation allows for Let's Encrypt certificates.
-     *
-     * @return bool
-     */
-    protected function checkInstallation()
-    {
-        if (config('webserver.ssl.lets-encrypt') && class_exists(Certificate::class) &&
-            ! empty($this->contact['username']) && ! empty($this->contact['email-address']) &&
-            (File::isDirectory($this->directory) || File::makeDirectory($this->directory, 0755, true))
-        ) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -68,5 +61,24 @@ class LetsEncryptHelper
         $certificate = (new Certificate($account, $this->hostname->id))->addHostname($this->hostname->hostname);
 
         return $certificate->request();
+    }
+
+    /**
+     * Checks whether the installation allows for Let's Encrypt certificates.
+     *
+     * @return bool
+     */
+    protected function checkInstallation()
+    {
+        if (config('webserver.ssl.lets-encrypt') &&
+            class_exists(Certificate::class) &&
+            !empty($this->contact['username']) &&
+            !empty($this->contact['email-address']) &&
+            (File::isDirectory($this->directory) || File::makeDirectory($this->directory, 0755, true))
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }
