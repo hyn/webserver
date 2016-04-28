@@ -5,10 +5,8 @@ namespace Hyn\Webserver\Commands;
 use App;
 use Hyn\Framework\Commands\AbstractCommand;
 use Hyn\Webserver\Helpers\LetsEncryptHelper;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
 
-class LetsEncryptCommand extends AbstractCommand implements SelfHandling, ShouldBeQueued
+class LetsEncryptCommand extends AbstractCommand
 {
 
     /**
